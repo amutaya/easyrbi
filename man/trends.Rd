@@ -20,9 +20,9 @@ trends
 \examples{
 library(easyrbi)
 
-# return rbi values for all sites
+# return summary statistics for all USGS sites given in the rbiWy_dfAll dataframe
 trends()
 
-# returnrbi values for specified sites
+# This function allows the user to input the study site name/number
 trends(site = c("01011000", "01042500"))
 }
