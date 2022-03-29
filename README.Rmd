@@ -31,7 +31,7 @@ The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists of functi
 ## Installation
 
 You can install the development version of easyrbi from Github:
-```{r, eval=FALSE}
+```{r, eval=FALSE, message=FALSE}
 # If you haven't installed remotes yet, do so:
 # install.packages("remotes")
 remotes::install_github("amutaya/easyrbi")
@@ -39,29 +39,25 @@ remotes::install_github("amutaya/easyrbi")
 
 ## Example
 
-```{r example}
+```{r example, message=FALSE}
 library(easyrbi)
 library(dplyr)
-
-#rbiWy_dfAll <- read_csv("rbiWy_dfAll.csv")
-all_sites <- as.data.frame(colnames(rbiWy_dfAll)) %>% 
-  rename(site_no = `colnames(rbiWy_dfAll)`) %>% 
-    filter(!site_no == "waterYear")
 ```
 
 1. This returns a character vector with 15 observations that include summary statistics from the Mann-Kendall and sens.slope analysis.
-```{r}
+```{r, eval=TRUE}
 df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
 site_num = seq(from = 1, to= 2, by = .1))
 
 trendAnalysis(df$site_num)
 ```
 2. This returns summary statistics for all USGS sites given in the rbiWy_dfAll dataframe.
-```{r cars}
-trends()
+```{r, eval=TRUE}
+trends() %>% 
+  head()
 ```
 3. This returns summary statistics for given USGS sites that are in the rbiWy_dfAll dataframe.
-```{r}
+```{r, eval=TRUE}
 trends(site = c("01011000", "01042500"))
 ```
 
