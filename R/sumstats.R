@@ -29,6 +29,7 @@ trendAnalysis <- function(x){
   mk <- MannKendall(x) # perform mann kendall analysis
   ss <- sens.slope(x) # perform sens.slope analysis
   df <- unlist(c(mk,ss), recursive = TRUE, use.names = TRUE) # create character vector
+  return(df)
 }
 
 
