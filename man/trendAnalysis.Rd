@@ -15,7 +15,8 @@ Calculate the sens.slope and MannKendall values
 trendAnalysis
 }
 \examples{
-
+# site_num is a numeric variable containing rbi values over consecutive years (year)
+library(easyrbi)
 df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
 site_num = seq(from = 1, to= 2, by = .1))
 

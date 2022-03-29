@@ -10,7 +10,7 @@ all_sites <- as.data.frame(colnames(rbiWy_dfAll)) %>%
 #'
 #' @param x a list of type spec_tbl_df/tbl_df/tbl/data.frame that has one column with consecutive times of class 'numeric'. The time variable can also be a 'Date' class.
 #'
-# #' @return data.frame a character vector with 15 variables and 1 observation
+# #' @return a character vector with 15 observations
 #' @export
 #'
 #' @importFrom Kendall MannKendall
@@ -42,15 +42,16 @@ trendAnalysis <- function(x){
 #' @export
 #'
 #' @import dplyr
+#' @import tidyr
 #' @importFrom readr read_csv
 #' @importFrom purrr map_dfr
 #' @examples
 #' library(easyrbi)
 #'
-#' # return rbi values for all sites
+#' # return summary statistics for all USGS sites given in the rbiWy_dfAll dataframe
 #' trends()
 #'
-#' # returnrbi values for specified sites
+#' # This function allows the user to input the study site name/number
 #' trends(site = c("01011000", "01042500"))
 
 trends <- function(site = all_sites$site_no){
@@ -65,4 +66,6 @@ trends <- function(site = all_sites$site_no){
     select(site_no, tau:conf.int2)
   return (trend_df)
 }
+
+
 

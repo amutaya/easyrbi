@@ -2,7 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -13,46 +12,59 @@ knitr::opts_chunk$set(
 )
 ```
 
-# SDS270
+### easyrbi R Package
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org/package=SDS270)
 <!-- badges: end -->
 
-The goal of SDS270 is to ...
+
+## Overview
+
+The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists of functions and datasets that can be used to calculate Richards-Baker Flashiness Index (RBI) trends over time for 301 sites. The main functions are:
+
+1. The trendAnalysis() function perform the MannKendall and sens.slope analysis on a data frame with annual Richards-Baker Flashiness Index (RBI) values. 
+2. The trends() function then maps these summary statistics into a one data frame, adds an additional column with the site numbers and removes the summary statistics row for the year variable. The trends() function has the ability to return a data frame containing of length 301 which summary statistics for all 301 sites or a custom number of sites specified by the user.
+
 
 ## Installation
 
-You can install the development version of SDS270 like so:
-
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+You can install the development version of easyrbi from Github:
+```{r, eval=FALSE}
+# If you haven't installed remotes yet, do so:
+# install.packages("remotes")
+remotes::install_github("amutaya/easyrbi")
 ```
 
 ## Example
 
-Hi there
-
-This is a basic example which shows you how to solve a common problem:
-
 ```{r example}
-#library(SDS270)
-## basic example code
+library(easyrbi)
+library(dplyr)
+
+#rbiWy_dfAll <- read_csv("rbiWy_dfAll.csv")
+all_sites <- as.data.frame(colnames(rbiWy_dfAll)) %>% 
+  rename(site_no = `colnames(rbiWy_dfAll)`) %>% 
+    filter(!site_no == "waterYear")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+1. This returns a character vector with 15 observations that include summary statistics from the Mann-Kendall and sens.slope analysis.
+```{r}
+df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
+site_num = seq(from = 1, to= 2, by = .1))
 
+trendAnalysis(df$site_num)
+```
+2. This returns summary statistics for all USGS sites given in the rbiWy_dfAll dataframe.
 ```{r cars}
-#summary(cars)
+trends()
+```
+3. This returns summary statistics for given USGS sites that are in the rbiWy_dfAll dataframe.
+```{r}
+trends(site = c("01011000", "01042500"))
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
 
-You can also embed plots, for example:
 
-```{r pressure, echo = FALSE}
-#plot(pressure)
-```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.

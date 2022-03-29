@@ -3,6 +3,7 @@
 export(trendAnalysis)
 export(trends)
 import(dplyr)
+import(tidyr)
 importFrom(Kendall,MannKendall)
 importFrom(purrr,map_dfr)
 importFrom(readr,read_csv)
