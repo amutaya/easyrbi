@@ -1,6 +1,5 @@
-rbiWy_dfAll <-
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMoc3ICoJarNy8yvsDt3M8voFPLr0jDkORQ4g1e59GnsRiOEpKnMKEyRBsN-nLzT40QXj9ZSiW5dkz/pub?gid=441939603&single=true&output=csv" %>%
-  read_csv()
+
+rbiWy_dfAll <- read_csv("data-raw/rbiWy_dfAll.csv")
 
 all_sites <- as.data.frame(colnames(rbiWy_dfAll)) %>%
   rename(site_no = `colnames(rbiWy_dfAll)`) %>%
@@ -57,7 +56,7 @@ trendAnalysis <- function(x){
 #' trends(site = c("01011000", "01042500"))
 
 trends <- function(site = all_sites$site_no){
-  dataFile <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSMoc3ICoJarNy8yvsDt3M8voFPLr0jDkORQ4g1e59GnsRiOEpKnMKEyRBsN-nLzT40QXj9ZSiW5dkz/pub?gid=441939603&single=true&output=csv")
+  dataFile <- rbiWy_dfAll
   trend_df <- map_dfr(dataFile, trendAnalysis) %>%
     select(-data.name) %>%
     cbind(as.data.frame(colnames(dataFile))) %>%
