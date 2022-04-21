@@ -65,7 +65,7 @@ trends <- function(site = all_sites$site_no){
     mutate_at(c(1:9, 12:14), as.numeric) %>%
     filter(site_no %in% site) %>%
     select(site_no, tau:conf.int2)
-  return (trend_df)
+  return(trend_df)
 }
 
 
