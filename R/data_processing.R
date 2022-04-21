@@ -57,3 +57,4 @@ rbi <- function(site_num, startDate, endDate, ...){
 }
 
 rbi(c("01564500", "01567000", "01567500", "01568000"), startDate = "1970-10-01", endDate ="2020-09-30")
+
