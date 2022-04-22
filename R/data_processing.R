@@ -20,7 +20,7 @@
 
 
 sitedata <- function(site_num,startDate, endDate){
-  site_values <<- dataRetrieval::readNWISdv(site_num, "00060",startDate, endDate) %>% # specify the parameter
+  site_values <- dataRetrieval::readNWISdv(site_num, "00060",startDate, endDate) %>% # specify the parameter
     left_join(dataRetrieval::readNWISsite(site_num), by = c("site_no" = "site_no")) %>% # get site area, lat, long etc
     select(Date, site_no, station_nm, lat_va, long_va, dec_lat_va, dec_long_va, coord_datum_cd,
            dec_coord_datum_cd, district_cd, state_cd, county_cd, country_cd, alt_va,
@@ -51,9 +51,9 @@ sitedata <- function(site_num,startDate, endDate){
 
 
 rbi <- function(site_num, startDate, endDate, ...){
-  site_values <<- data.frame()
-  all_site_values <<- rbind(site_values, sitedata(site_num, startDate, endDate))
-  qdiff <<- tibble(all_site_values, c(0, diff(mm_day))) %>%
+  site_values <- data.frame()
+  all_site_values <- rbind(site_values, sitedata(site_num, startDate, endDate))
+  qdiff <- tibble(all_site_values, c(0, diff(mm_day))) %>%
     dplyr::rename(qdiff_val = `c(0, diff(mm_day))`) %>%
     mutate(rbi_values = (sum(abs(qdiff_val))/sum(mm_day))) # and calculate rbi for each year number (sum of changes
   #in daily discharge/sum of daily discharge)
