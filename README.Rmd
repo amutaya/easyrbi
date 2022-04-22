@@ -50,7 +50,8 @@ library(dataRetrieval)
 ```
 1. This returns a data.frames with 18 variables from the USGS database which include discharge, drainage area and waterYear
 ```{r, eval = TRUE}
-sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>% 
+  head(10)
 ```
 2. This returns a data.frames with 20 variables from the USGS database which include discharge, drainage area, waterYear and the RBI value
 ```{r, eval = TRUE}
@@ -63,14 +64,10 @@ site_num = seq(from = 1, to= 2, by = .1))
 
 trendAnalysis(df$site_num)
 ```
-4. This returns summary statistics for all USGS sites given in the rbiWy_dfAll dataframe.
+4. This returns summary statistics for the first 5 five USGS sites that are in the rbiWy_dfAll dataframe.
 ```{r, eval=TRUE}
-trends() %>% 
-  head()
-```
-3. This returns summary statistics for given USGS sites that are in the rbiWy_dfAll dataframe.
-```{r, eval=TRUE}
-trends(site = c("01011000", "01042500"))
+trends(x = rbiWy_dfAll) %>% 
+  head(5)
 ```
 
 

@@ -5,6 +5,7 @@
 #' @param startDate a "date" following the Y-m-d format.
 #' @param endDate a "date" following the Y-m-d format.
 #' @return returns a data.frame with 18 variables.
+#' @export
 #'
 #' @import dplyr
 #' @import tidyr
@@ -15,6 +16,7 @@
 #' # return stream hydrology data for given USGS sites
 #' library(easyrbi)
 #' sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+
 
 
 sitedata <- function(site_num,startDate, endDate){
@@ -36,6 +38,7 @@ sitedata <- function(site_num,startDate, endDate){
 #' @param endDate a "date" following the Y-m-d format.
 #' @param ... further arguments passed to or from other methods.
 #' @return returns a data.frame with 20 variables.
+#' @export
 #'
 #' @import dplyr
 #' @import tidyr
@@ -45,6 +48,7 @@ sitedata <- function(site_num,startDate, endDate){
 #' # return stream hydrology data for given USGS sites with calculated RBI.
 #' library(easyrbi)
 #' rbi(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+
 
 rbi <- function(site_num, startDate, endDate, ...){
   site_values <- data.frame()

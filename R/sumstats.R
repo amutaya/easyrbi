@@ -1,10 +1,3 @@
-
-rbiWy_dfAll <- read_csv("data-raw/rbiWy_dfAll.csv")
-
-all_sites <- as.data.frame(colnames(rbiWy_dfAll)) %>%
-  rename(site_no = `colnames(rbiWy_dfAll)`) %>%
-  filter(!site_no == "waterYear")
-
 #' Calculate the sens.slope and MannKendall values
 #'trendAnalysis
 #'
@@ -37,7 +30,7 @@ trendAnalysis <- function(x){
 #' Returns the results from trendAnalysis as a dataframe
 #' trends
 #'
-#' @param site a "character" vector that contains the study site numbers. The default for the site argument is character vector with 301 study site names/numbers.
+#' @param x a data.frame containing the waterYear and RBI values for sites in one column.
 #'
 #' @return returns a list/data.frame with 15 variables calculated using trendAnalysis. The data.frame has 3 columns that are character vectors and 12 that are numeric.
 #' @export
@@ -48,22 +41,22 @@ trendAnalysis <- function(x){
 #' @importFrom purrr map_dfr
 #' @examples
 #' library(easyrbi)
+#' library(dplyr)
 #'
-#' # return summary statistics for all USGS sites given in the rbiWy_dfAll dataframe
-#' trends()
-#'
-#' # This function allows the user to input the study site name/number
-#' trends(site = c("01011000", "01042500"))
+#' # return summary statistics for all USGS sites given in a dataframe containing annual RBI values
+#' rbiWy_dfAll <- slice_tail(rbiWy_dfAll, n = 10)
+#' trends(x = rbiWy_dfAll)
 
-trends <- function(site = all_sites$site_no){
-  dataFile <- rbiWy_dfAll
+
+trends <- function(x){
+  dataFile <- x
   trend_df <- map_dfr(dataFile, trendAnalysis) %>%
     select(-data.name) %>%
     cbind(as.data.frame(colnames(dataFile))) %>%
     rename(site_no = `colnames(dataFile)`) %>%
     filter(!site_no == "waterYear") %>%
     mutate_at(c(1:9, 12:14), as.numeric) %>%
-    filter(site_no %in% site) %>%
+    #filter(site_no %in% site) %>%
     select(site_no, tau:conf.int2)
   return(trend_df)
 }
