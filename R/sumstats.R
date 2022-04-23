@@ -44,8 +44,8 @@ trendAnalysis <- function(x){
 #' library(dplyr)
 #'
 #' # return summary statistics for all USGS sites given in a dataframe containing annual RBI values
-#' rbiWy_dfAll <- slice_tail(rbiWy_dfAll, n = 10)
-#' trends(x = rbiWy_dfAll)
+#' data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+#' trends(x = data)
 
 
 trends <- function(x){

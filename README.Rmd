@@ -66,7 +66,9 @@ trendAnalysis(df$site_num)
 ```
 4. This returns summary statistics for the first 5 five USGS sites that are in the rbiWy_dfAll dataframe.
 ```{r, eval=TRUE}
-trends(x = rbiWy_dfAll) %>% 
+data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+
+trends(x = data) %>% 
   head(5)
 ```
 
