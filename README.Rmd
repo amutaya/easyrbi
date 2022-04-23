@@ -55,7 +55,7 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 ```
 2. This returns a data.frames with 20 variables from the USGS database which include discharge, drainage area, waterYear and the RBI value
 ```{r, eval = TRUE}
-rbi(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 ```
 3. This returns a character vector with 15 observations that include summary statistics from the Mann-Kendall and sens.slope analysis.
 ```{r, eval=TRUE}
