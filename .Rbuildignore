@@ -3,5 +3,5 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^cran-comments\.md$
-^finalproject.\Rproj$
+^finalproject\.Rproj$
 ^data-raw$
