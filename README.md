@@ -16,10 +16,14 @@ of functions and datasets that can be used to calculate Richards-Baker
 Flashiness Index (RBI) trends over time for 301 sites. The main
 functions are:
 
-1.  The trendAnalysis() function perform the MannKendall and sens.slope
+1.  The sitedata() function retrieves hydrology data for given USGS
+    gauge sites for a specified period.
+2.  rbi\_df() returns calculated RBI values for given USGS sites for a
+    specified period.
+3.  The trendAnalysis() function perform the MannKendall and sens.slope
     analysis on a data frame with annual Richards-Baker Flashiness Index
     (RBI) values.
-2.  The trends() function then maps these summary statistics into a one
+4.  The trends() function then maps these summary statistics into a one
     data frame, adds an additional column with the site numbers and
     removes the summary statistics row for the year variable. The
     trends() function has the ability to return a data frame containing
@@ -40,10 +44,85 @@ remotes::install_github("amutaya/easyrbi")
 
 ``` r
 library(easyrbi)
-library(dplyr)
+library(tidyverse)
+library(trend)
+library(Kendall)
+library(dataRetrieval)
 ```
 
-1.  This returns a character vector with 15 observations that include
+1.  This returns a data.frames with 18 variables from the USGS database
+    which include discharge, drainage area and waterYear
+
+``` r
+sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>% 
+  head(10)
+#>          Date  site_no                            station_nm lat_va long_va
+#> 1  1970-10-01 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 2  1970-10-02 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 3  1970-10-03 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 4  1970-10-04 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 5  1970-10-05 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 6  1970-10-06 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 7  1970-10-07 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 8  1970-10-08 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 9  1970-10-09 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#> 10 1970-10-10 01564500 Aughwick Creek near Three Springs, PA 401245  775532
+#>    dec_lat_va dec_long_va coord_datum_cd dec_coord_datum_cd district_cd
+#> 1    40.21258   -77.92528          NAD27              NAD83          42
+#> 2    40.21258   -77.92528          NAD27              NAD83          42
+#> 3    40.21258   -77.92528          NAD27              NAD83          42
+#> 4    40.21258   -77.92528          NAD27              NAD83          42
+#> 5    40.21258   -77.92528          NAD27              NAD83          42
+#> 6    40.21258   -77.92528          NAD27              NAD83          42
+#> 7    40.21258   -77.92528          NAD27              NAD83          42
+#> 8    40.21258   -77.92528          NAD27              NAD83          42
+#> 9    40.21258   -77.92528          NAD27              NAD83          42
+#> 10   40.21258   -77.92528          NAD27              NAD83          42
+#>    state_cd county_cd country_cd alt_va drain_area_va X_00060_00003     mm_day
+#> 1        42       061         US 618.65           205            37 0.17049387
+#> 2        42       061         US 618.65           205            31 0.14284621
+#> 3        42       061         US 618.65           205            30 0.13823827
+#> 4        42       061         US 618.65           205            29 0.13363033
+#> 5        42       061         US 618.65           205            26 0.11980650
+#> 6        42       061         US 618.65           205            21 0.09676679
+#> 7        42       061         US 618.65           205            19 0.08755090
+#> 8        42       061         US 618.65           205            17 0.07833502
+#> 9        42       061         US 618.65           205            18 0.08294296
+#> 10       42       061         US 618.65           205            17 0.07833502
+#>    waterYear
+#> 1       1971
+#> 2       1971
+#> 3       1971
+#> 4       1971
+#> 5       1971
+#> 6       1971
+#> 7       1971
+#> 8       1971
+#> 9       1971
+#> 10      1971
+```
+
+2.  This returns a data.frames with 20 variables from the USGS database
+    which include discharge, drainage area, waterYear and the RBI value
+
+``` r
+rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+#> # A tibble: 10 × 3
+#>    waterYear `01564500` `01567000`
+#>        <dbl>      <dbl>      <dbl>
+#>  1      1971      0.379      0.181
+#>  2      1972      0.467      0.255
+#>  3      1973      0.402      0.170
+#>  4      1974      0.409      0.168
+#>  5      1975      0.480      0.219
+#>  6      1976      0.398      0.161
+#>  7      1977      0.424      0.218
+#>  8      1978      0.396      0.186
+#>  9      1979      0.378      0.223
+#> 10      1980      0.379      0.208
+```
+
+3.  This returns a character vector with 15 observations that include
     summary statistics from the Mann-Kendall and sens.slope analysis.
 
 ``` r
@@ -63,58 +142,20 @@ trendAnalysis(df$site_num)
 #>                   "11"                  "0.1"                  "0.1"
 ```
 
-2.  This returns summary statistics for all USGS sites given in the
-    rbiWy\_dfAll dataframe.
+4.  This returns the Mann-Kendall and sens.slope summary statistics for
+    any given USGS gauge sites.
 
 ``` r
-trends() %>% 
-  head()
-#> Rows: 50 Columns: 302
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> dbl (302): waterYear, 1011000, 1013500, 1017000, 1019000, 1022500, 1030500, ...
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#>   site_no         tau         sl    S    D     varS estimates.Sen's slope
-#> 1 1011000  0.10367347 0.29189563  127 1225 14291.67          1.479563e-04
-#> 2 1013500  0.09877551 0.31548333  121 1225 14291.67          6.057078e-05
-#> 3 1017000  0.15918367 0.10463595  195 1225 14291.67          2.670132e-04
-#> 4 1019000 -0.16734694 0.08792788 -205 1225 14291.67         -2.885680e-04
-#> 5 1022500  0.24571429 0.01209164  301 1225 14291.67          6.803685e-04
-#> 6 1030500  0.20816326 0.03361380  255 1225 14291.67          3.038356e-04
-#>   statistic.z    p.value null.value.z alternative      method parameter.n
-#> 1    1.053972 0.29189570            0   two.sided Sen's slope          50
-#> 2    1.003783 0.31548325            0   two.sided Sen's slope          50
-#> 3    1.622782 0.10463593            0   two.sided Sen's slope          50
-#> 4   -1.706431 0.08792787            0   two.sided Sen's slope          50
-#> 5    2.509457 0.01209168            0   two.sided Sen's slope          50
-#> 6    2.124674 0.03361383            0   two.sided Sen's slope          50
-#>       conf.int1    conf.int2
-#> 1 -1.667483e-04 4.641122e-04
-#> 2 -8.311187e-05 2.146143e-04
-#> 3 -8.930073e-05 7.162620e-04
-#> 4 -6.506636e-04 6.861917e-05
-#> 5  1.868684e-04 1.201730e-03
-#> 6  2.661966e-05 5.654226e-04
-```
+data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
-3.  This returns summary statistics for given USGS sites that are in the
-    rbiWy\_dfAll dataframe.
-
-``` r
-trends(site = c("01011000", "01042500"))
-#> Rows: 50 Columns: 302
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> dbl (302): waterYear, 1011000, 1013500, 1017000, 1019000, 1022500, 1030500, ...
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#>  [1] site_no               tau                   sl                   
-#>  [4] S                     D                     varS                 
-#>  [7] estimates.Sen's slope statistic.z           p.value              
-#> [10] null.value.z          alternative           method               
-#> [13] parameter.n           conf.int1             conf.int2            
-#> <0 rows> (or 0-length row.names)
+trends(x = data) 
+#>    site_no         tau        sl   S  D varS estimates.Sen's slope statistic.z
+#> 1 01564500 -0.28888890 0.2831308 -13 45  125         -0.0038942433  -1.0733126
+#> 2 01567000  0.06666667 0.8580277   3 45  125          0.0008869355   0.1788854
+#>     p.value null.value.z alternative      method parameter.n    conf.int1
+#> 1 0.2831309            0   two.sided Sen's slope          10 -0.014949082
+#> 2 0.8580277            0   two.sided Sen's slope          10 -0.005355905
+#>     conf.int2
+#> 1 0.004216093
+#> 2 0.010844155
 ```
