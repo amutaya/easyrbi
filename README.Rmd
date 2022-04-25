@@ -64,12 +64,11 @@ site_num = seq(from = 1, to= 2, by = .1))
 
 trendAnalysis(df$site_num)
 ```
-4. This returns summary statistics for the first 5 five USGS sites that are in the rbiWy_dfAll dataframe.
+4. This returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
 ```{r, eval=TRUE}
 data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
-trends(x = data) %>% 
-  head(5)
+trends(x = data) 
 ```
 
 
