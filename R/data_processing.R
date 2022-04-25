@@ -18,7 +18,6 @@
 #' sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 
-
 sitedata <- function(site_num,startDate, endDate){
   site_values <- dataRetrieval::readNWISdv(site_num, "00060",startDate, endDate) %>% # specify the parameter
     left_join(dataRetrieval::readNWISsite(site_num), by = c("site_no" = "site_no")) %>% # get site area, lat, long etc
@@ -32,33 +31,53 @@ sitedata <- function(site_num,startDate, endDate){
 
 
 #' Calculate the Richard Baker Index (RBI) for given sites
+#' rbi
 #'
-#' @param site_num a "character" vector that contains the study site numbers.
-#' @param startDate a "date" following the Y-m-d format.
-#' @param endDate a "date" following the Y-m-d format.
-#' @param ... further arguments passed to or from other methods.
-#' @return returns a data.frame with 20 variables.
+#' @param q a dataframe containing the daily discharge data measured in mm_day
 #' @export
 #'
 #' @import dplyr
 #' @import tidyr
 #' @import dataRetrieval
-#'
-#' @examples
-#' # return stream hydrology data for given USGS sites with calculated RBI.
-#' library(easyrbi)
-#' rbi(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 
-rbi <- function(site_num, startDate, endDate, ...){
-  site_values <- data.frame()
-  all_site_values <- rbind(site_values, sitedata(site_num, startDate, endDate))
-  qdiff <- tibble(all_site_values, c(0, diff(mm_day))) %>%
+rbi <- function(q){
+  qdiff <- tibble(q, c(0, diff(mm_day))) %>%
     dplyr::rename(qdiff_val = `c(0, diff(mm_day))`) %>%
     mutate(rbi_values = (sum(abs(qdiff_val))/sum(mm_day))) # and calculate rbi for each year number (sum of changes
   #in daily discharge/sum of daily discharge)
-  return(qdiff)
 }
 
-rbi(c("01564500", "01567000", "01567500", "01568000"), startDate = "1970-10-01", endDate ="2020-09-30")
+#' Add calculated RBI value to the data.frame
+#' rbi_df
+#'
+#' @param site_num a "character" vector that contains the study site numbers.
+#' @param startDate a "date" following the Y-m-d format.
+#' @param endDate a "date" following the Y-m-d format.
+#' @return returns a data.frame with the waterYear variable and RBI values for specified sites saved in columns.
+#' @export
+#'
+#' @import dplyr
+#' @import tidyr
+#' @importFrom purrr map
+#' @import dataRetrieval
+#'
+#' @examples
+#' # return a dataframe with annual RBI values for specified USGS gauge sites over specified duration
+#' library(easyrbi)
+#' rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
+
+rbi_df <- function(site_num, startDate, endDate){
+  site_values <- data.frame()
+  all_site_values <- rbind(site_values, sitedata(site_num, startDate, endDate)) %>%
+    group_by(site_no, waterYear) %>%
+    nest() %>%
+    summarise(site_no = site_no,
+              waterYear = waterYear,
+              rbi_vals = map(data, rbi)) %>%
+    unnest(rbi_vals) %>%
+    distinct(site_no, waterYear, rbi_values) %>%
+    pivot_wider(names_from = site_no, values_from = rbi_values)
+  return(all_site_values)
+}
