@@ -5,10 +5,11 @@
 \alias{rbiWy_dfAll}
 \title{Calculated RBI data for 301 sites USGS sites data}
 \format{
-A data frame of 50 rows and 301 columns.
+A data frame of 15050 rows and 3 columns.
 \describe{
 \item{waterYear}{The water year}
-\item{01011000 - 01576500}{annual RBI values for the 301 study sites}
+\item{site_no}{USGS gauge site number}
+\item{rbi}{annual RBI values for the 301 study sites}
 }
 }
 \usage{

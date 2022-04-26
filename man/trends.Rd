@@ -5,10 +5,10 @@
 \title{Returns the results from trendAnalysis as a dataframe
 trends}
 \usage{
-trends(site = all_sites$site_no)
+trends(x)
 }
 \arguments{
-\item{site}{a "character" vector that contains the study site numbers. The default for the site argument is character vector with 301 study site names/numbers.}
+\item{x}{a data.frame containing the waterYear and RBI values for sites in one column.}
 }
 \value{
 returns a list/data.frame with 15 variables calculated using trendAnalysis. The data.frame has 3 columns that are character vectors and 12 that are numeric.
@@ -19,10 +19,9 @@ trends
 }
 \examples{
 library(easyrbi)
+library(dplyr)
 
-# return summary statistics for all USGS sites given in the rbiWy_dfAll dataframe
-trends()
-
-# This function allows the user to input the study site name/number
-trends(site = c("01011000", "01042500"))
+# return summary statistics for all USGS sites given in a dataframe containing annual RBI values
+data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
+trends(x = data)
 }
