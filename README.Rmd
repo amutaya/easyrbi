@@ -60,7 +60,7 @@ rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 3. This returns a character vector with 15 observations that include summary statistics from the Mann-Kendall and sens.slope analysis.
 ```{r, eval=TRUE}
 df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
-site_num = seq(from = 1, to= 2, by = .1))
+rbi = seq(from = 1, to= 2, by = .1))
 
 trendAnalysis(df$site_num)
 ```
