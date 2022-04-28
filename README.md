@@ -48,6 +48,7 @@ library(tidyverse)
 library(trend)
 library(Kendall)
 library(dataRetrieval)
+library(usethis)
 ```
 
 1.  This returns a data.frames with 18 variables from the USGS database
@@ -122,27 +123,7 @@ rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 #> 10      1980      0.379      0.208
 ```
 
-3.  This returns a character vector with 15 observations that include
-    summary statistics from the Mann-Kendall and sens.slope analysis.
-
-``` r
-df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
-site_num = seq(from = 1, to= 2, by = .1))
-
-trendAnalysis(df$site_num)
-#>                    tau                     sl                      S 
-#>     "1.00000011920929" "2.62260437011719e-05"                   "55" 
-#>                      D                   varS  estimates.Sen's slope 
-#>     "54.9999961853027"                  "165"                  "0.1" 
-#>            statistic.z                p.value           null.value.z 
-#>     "4.20389429847222" "2.62361493945871e-05"                    "0" 
-#>            alternative              data.name                 method 
-#>            "two.sided"                    "x"          "Sen's slope" 
-#>            parameter.n              conf.int1              conf.int2 
-#>                   "11"                  "0.1"                  "0.1"
-```
-
-4.  This returns the Mann-Kendall and sens.slope summary statistics for
+3.  This returns the Mann-Kendall and sens.slope summary statistics for
     any given USGS gauge sites.
 
 ``` r
@@ -158,4 +139,19 @@ trends(x = data)
 #>     conf.int2
 #> 1 0.004216093
 #> 2 0.010844155
+```
+
+4.  Retrieve dam removal data for specified sites directly from the USGS
+    Gages II website. This time series data recorded between 1931-01-01
+    and 2014-12-31.
+
+``` r
+dam_removal(c("01564500", "01567000"))
+#> Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
+#> # A tibble: 3 × 7
+#>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
+#>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
+#> 1 01567000           2004         40.7         -77.6 "Burnham" Tea Creek   PA   
+#> 2 01567000           2006         40.6         -77.7 "Lewisto… Strodes Run PA   
+#> 3 01567000           2011         40.7         -78.2 ""        Tributary … PA
 ```
