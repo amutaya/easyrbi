@@ -5,3 +5,5 @@
 ^cran-comments\.md$
 ^finalproject\.Rproj$
 ^data-raw$
+^Dataset3_DamRemovals$
+^Dataset3_DamRemovals\.zip$
