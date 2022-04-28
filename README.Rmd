@@ -47,6 +47,7 @@ library(tidyverse)
 library(trend)
 library(Kendall)
 library(dataRetrieval)
+library(usethis)
 ```
 1. This returns a data.frames with 18 variables from the USGS database which include discharge, drainage area and waterYear
 ```{r, eval = TRUE}
@@ -70,7 +71,9 @@ data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 trends(x = data) 
 ```
-
-
+5. Retrieve dam removal data for specified sites directly from the USGS Gages II website. This time series data recorded between 1931-01-01 and 2014-12-31.
+```{r}
+dam_removal(c("01564500", "01567000"))
+```
 
 
