@@ -20,15 +20,11 @@ functions are:
     gauge sites for a specified period.
 2.  rbi\_df() returns calculated RBI values for given USGS sites for a
     specified period.
-3.  The trendAnalysis() function perform the MannKendall and sens.slope
-    analysis on a data frame with annual Richards-Baker Flashiness Index
-    (RBI) values.
-4.  The trends() function then maps these summary statistics into a one
-    data frame, adds an additional column with the site numbers and
-    removes the summary statistics row for the year variable. The
-    trends() function has the ability to return a data frame containing
-    of length 301 which summary statistics for all 301 sites or a custom
-    number of sites specified by the user.
+3.  The trends() function has the ability to return a data frame
+    containing Mann-Kendall and sens.slope summary statistics for a
+    custom number of sites specified by the user.
+4.  dam\_removal() retrieves dam removal data from the USGS Gages II
+    website for any number of given gauge station numbers.
 
 ## Installation
 
@@ -147,7 +143,7 @@ trends(x = data)
 
 ``` r
 dam_removal(c("01564500", "01567000"))
-#> Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
+#> Downloaded: 0.01 MB  (67%)Downloaded: 0.01 MB  (67%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
 #> # A tibble: 3 × 7
 #>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
 #>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
