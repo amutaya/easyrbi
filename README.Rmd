@@ -26,8 +26,8 @@ The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists of functi
 
 1. The sitedata() function retrieves hydrology data for given USGS gauge sites for a specified period.
 2. rbi_df() returns calculated RBI values for given USGS sites for a specified period.
-3. The trendAnalysis() function perform the MannKendall and sens.slope analysis on a data frame with annual Richards-Baker Flashiness Index (RBI) values. 
-4. The trends() function then maps these summary statistics into a one data frame, adds an additional column with the site numbers and removes the summary statistics row for the year variable. The trends() function has the ability to return a data frame containing of length 301 which summary statistics for all 301 sites or a custom number of sites specified by the user.
+3. The trends() function has the ability to return a data frame containing Mann-Kendall and sens.slope summary statistics for a custom number of sites specified by the user.
+4. dam_removal() retrieves dam removal data from the USGS Gages II website for any number of given gauge station numbers.
 
 
 ## Installation
@@ -58,21 +58,14 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 ```{r, eval = TRUE}
 rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 ```
-3. This returns a character vector with 15 observations that include summary statistics from the Mann-Kendall and sens.slope analysis.
-```{r, eval=TRUE}
-df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
-rbi = seq(from = 1, to= 2, by = .1))
-
-trendAnalysis(df$site_num)
-```
-4. This returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
+3. This returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
 ```{r, eval=TRUE}
 data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 trends(x = data) 
 ```
-5. Retrieve dam removal data for specified sites directly from the USGS Gages II website. This time series data recorded between 1931-01-01 and 2014-12-31.
-```{r}
+4. Retrieve dam removal data for specified sites directly from the USGS Gages II website. This time series data recorded between 1931-01-01 and 2014-12-31.
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
 dam_removal(c("01564500", "01567000"))
 ```
 

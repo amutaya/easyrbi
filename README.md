@@ -147,7 +147,7 @@ trends(x = data)
 
 ``` r
 dam_removal(c("01564500", "01567000"))
-#> Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
+#> Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
 #> # A tibble: 3 × 7
 #>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
 #>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
