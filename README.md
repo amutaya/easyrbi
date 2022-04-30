@@ -13,18 +13,21 @@ status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org
 ## Overview
 
 The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists
-of functions and datasets that can be used to calculate Richards-Baker
-Flashiness Index (RBI) trends over time for 301 sites. The main
-functions are:
+of functions that retrieve streamflow data from the USGS website, by
+using tools in `dataRetrieval` package and calculate the Richards-Baker
+Flashiness Index (RBI) trends over time for any given gauge stations.
+The package also contains functions to download time series land use
+data (USGS Gages II) collected between 1931-01-01 and 2014-12-31. Some
+of the functions included in the package:
 
-1.  The sitedata() function retrieves hydrology data for given USGS
-    gauge sites for a specified period.
-2.  rbi\_df() returns calculated RBI values for given USGS sites for a
+-   `sitedata`: retrieves hydrology data for given USGS gauge sites for
+    a specified period.
+-   `rbi_df`: returns calculated RBI values for given USGS sites for a
     specified period.
-3.  The trends() function has the ability to return a data frame
-    containing Mann-Kendall and sens.slope summary statistics for a
-    custom number of sites specified by the user.
-4.  dam\_removal() retrieves dam removal data from the USGS Gages II
+-   `trends`: returns a data frame containing Mann-Kendall and
+    sens.slope summary statistics for a custom number of sites specified
+    by the user.
+-   `dam_removal`: retrieves dam removal data from the USGS Gages II
     website for any number of given gauge station numbers.
 
 ## Installation
@@ -37,7 +40,7 @@ You can install the development version of easyrbi from Github:
 remotes::install_github("amutaya/easyrbi")
 ```
 
-## Example
+## Examples
 
 ``` r
 library(easyrbi)
@@ -48,8 +51,10 @@ library(dataRetrieval)
 library(usethis)
 ```
 
-1.  This returns a data.frames with 18 variables from the USGS database
-    which include discharge, drainage area and waterYear
+#### Retrieve USGS gauge station data
+
+-   Returns a data.frames with 18 variables from the USGS database which
+    include discharge, drainage area and the waterYear.
 
 ``` r
 sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>% 
@@ -100,8 +105,10 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 #> 10      1971
 ```
 
-2.  This returns a data.frames with 20 variables from the USGS database
-    which include discharge, drainage area, waterYear and the RBI value
+#### Calculate the annul Richard’s Barker Index (RBI)
+
+-   Returns a data.frames with the waterYear and respective RBI values
+    for given sites over a specified timeframe
 
 ``` r
 rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
@@ -120,8 +127,10 @@ rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 #> 10      1980      0.379      0.208
 ```
 
-3.  This returns the Mann-Kendall and sens.slope summary statistics for
-    any given USGS gauge sites.
+#### Test time series trends
+
+-   Returns the Mann-Kendall and sens.slope summary statistics for any
+    given USGS gauge sites.
 
 ``` r
 data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
@@ -138,9 +147,11 @@ trends(x = data)
 #> 2 0.010844155
 ```
 
-4.  Retrieve dam removal data for specified sites directly from the USGS
-    Gages II website. This time series data recorded between 1931-01-01
-    and 2014-12-31.
+#### Retrieve land use data
+
+-   Retrieves dam removal data for specified sites directly from the
+    USGS Gages II website. This time series data recorded between
+    1931-01-01 and 2014-12-31.
 
 ``` r
 dam_removal(c("01564500", "01567000"))
