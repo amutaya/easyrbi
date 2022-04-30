@@ -28,6 +28,7 @@ The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists of functi
 - `sitedata`: retrieves hydrology data for given USGS gauge sites for a specified period.
 - `rbi_df`: returns calculated RBI values for given USGS sites for a specified period.
 - `trends`: returns a data frame containing Mann-Kendall and sens.slope summary statistics for a custom number of sites specified by the user.
+- `basin_id`: Check the drainage area, eco-region and classification (reference or non-reference)
 - `dam_removal`: retrieves dam removal data from the USGS Gages II website for any number of given gauge station numbers.
 
 
@@ -75,5 +76,14 @@ trends(x = data)
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
 dam_removal(c("01564500", "01567000"))
 ```
+#### Get basin ID data 
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+basin_id(c("01567000", "01490000", "01492500"))
+```
 
+#### Investigate the trends at sites where dams were removed.
+- For any given gauge stations, check if there is a relationship between trends and dam removals 
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
+```
 

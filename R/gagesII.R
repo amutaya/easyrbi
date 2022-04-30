@@ -1,5 +1,4 @@
-#' Retrieve dam removal data for specified sites directly from the USGS Gages II website. This time series data recorded between 1931-01-01 and 2014-12-31
-#'dam_removal
+#' Retrieve dam removal time series data the USGS Gages II website.
 #'
 #' @param site_num a "character" vector that contains the study site numbers.
 #' @return returns a data frame with 7 variables which includes the year when the dam was removed and the site location.
@@ -31,8 +30,7 @@ dam_removal <- function(site_num){
   return(dams)
 }
 
-#' Retrieve dam removal and hydrology data from the USGS and USGS Gages II websites for given sites over a specified period. The dataframe contains calculated RBI summary statistics and dam removal time series data recorded between 1931-01-01 and 2014-12-31.
-#' dam_trends
+#' Retrieve dam removal and hydrology data from the USGS and USGS Gages II websites.
 #'
 #' @param site_num a "character" vector that contains the study site numbers.
 #' @param startDate a "date" following the Y-m-d format.
@@ -48,8 +46,35 @@ dam_removal <- function(site_num){
 dam_trends <- function(site_num, startDate, endDate){
   rbi_data <- rbi_df(site_num, startDate, endDate)
 
-  dam_trends_df <- trends(rbi_data) %>%
-    left_join(dam_removal(site_num), by = c("site_no"= "STAID"))
+  dam_trends_df <- dam_removal(site_num) %>%
+    right_join(trends(rbi_data), by = c("STAID"= "site_no"))
   return(dam_trends_df)
+}
+
+#' Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II
+#'
+#' @param site_num a "character" vector that contains the study site numbers.
+#' @return returns a data frame with 10 variables which includes the drainage area and site classification
+#' @export
+#'
+#' @example
+#' returns the basin ID data for specified sites
+#' library(easyrbi)
+#' basin_id(c("01567000", "01490000", "01492500"))
+#'
+basin_id <- function(site_num){
+  basin_url <- "https://www.sciencebase.gov/catalog/file/get/59692a64e4b0d1f9f05fbd39?f=__disk__3b%2F5c%2F06%2F3b5c0605384344f93b61c00fccf1a304b96019e3"
+  basin_data <- use_zip(
+    basin_url,
+    destdir = getwd(),
+    cleanup = if (rlang::is_interactive()) NA else FALSE
+
+  )
+
+  basins <- read.table("Dataset1_BasinID/BasinID.txt",sep=",",header=T) %>%
+    mutate(STAID = as.character(paste0("0", STAID))) %>%
+    filter(STAID == site_num) %>%
+    as_tibble()
+  return(basins)
 }
 
