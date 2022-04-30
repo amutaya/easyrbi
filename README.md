@@ -7,6 +7,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org/package=SDS270)
+[![R-CMD-check](https://github.com/wndlovu/easyrbi/workflows/R-CMD-check/badge.svg)](https://github.com/wndlovu/easyrbi/actions)
 <!-- badges: end -->
 
 ## Overview
@@ -143,7 +144,7 @@ trends(x = data)
 
 ``` r
 dam_removal(c("01564500", "01567000"))
-#> Downloaded: 0.01 MB  (67%)Downloaded: 0.01 MB  (67%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
+#> Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
 #> # A tibble: 3 × 7
 #>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
 #>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
