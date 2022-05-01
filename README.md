@@ -7,28 +7,33 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org/package=SDS270)
+[![R-CMD-check](https://github.com/wndlovu/easyrbi/workflows/R-CMD-check/badge.svg)](https://github.com/wndlovu/easyrbi/actions)
 <!-- badges: end -->
 
 ## Overview
 
 The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists
-of functions and datasets that can be used to calculate Richards-Baker
-Flashiness Index (RBI) trends over time for 301 sites. The main
-functions are:
+of functions that retrieve streamflow data (pCode = 00060) from the
+[USGS website](https://waterservices.usgs.gov/rest/Site-Test-Tool.html),
+by using tools in the `dataRetrieval` package. Another set of functions
+can be used to calculate the Richards-Baker Flashiness Index (RBI)
+trends over time for any given gauge stations. The package also contains
+functions to download time series land use data [USGS Gages
+II](https://www.sciencebase.gov/catalog/item/59692a64e4b0d1f9f05fbd39)
+collected between 1931-01-01 and 2014-12-31. Some of the functions
+included in the package:
 
-1.  The sitedata() function retrieves hydrology data for given USGS
-    gauge sites for a specified period.
-2.  rbi\_df() returns calculated RBI values for given USGS sites for a
+-   `sitedata`: retrieves hydrology data for given USGS gauge sites for
+    a specified period.
+-   `rbi_df`: returns calculated RBI values for given USGS sites for a
     specified period.
-3.  The trendAnalysis() function perform the MannKendall and sens.slope
-    analysis on a data frame with annual Richards-Baker Flashiness Index
-    (RBI) values.
-4.  The trends() function then maps these summary statistics into a one
-    data frame, adds an additional column with the site numbers and
-    removes the summary statistics row for the year variable. The
-    trends() function has the ability to return a data frame containing
-    of length 301 which summary statistics for all 301 sites or a custom
-    number of sites specified by the user.
+-   `trends`: returns a data frame containing Mann-Kendall and
+    sens.slope summary statistics for a custom number of sites specified
+    by the user.
+-   `basin_id`: Check the drainage area, eco-region and classification
+    (reference or non-reference)
+-   `dam_removal`: retrieves dam removal data from the USGS Gages II
+    website for any number of given gauge station numbers.
 
 ## Installation
 
@@ -40,7 +45,7 @@ You can install the development version of easyrbi from Github:
 remotes::install_github("amutaya/easyrbi")
 ```
 
-## Example
+## Examples
 
 ``` r
 library(easyrbi)
@@ -48,10 +53,15 @@ library(tidyverse)
 library(trend)
 library(Kendall)
 library(dataRetrieval)
+library(usethis)
 ```
 
-1.  This returns a data.frames with 18 variables from the USGS database
-    which include discharge, drainage area and waterYear
+### Retrieve USGS gauge station data
+
+#### Site data
+
+-   Returns a data.frames with 18 variables from the USGS database which
+    include discharge, drainage area and the waterYear.
 
 ``` r
 sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>% 
@@ -102,8 +112,10 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 #> 10      1971
 ```
 
-2.  This returns a data.frames with 20 variables from the USGS database
-    which include discharge, drainage area, waterYear and the RBI value
+#### Calculate the annul Richards Barker Flashiness Index (RBI)
+
+-   Returns a data.frames with the waterYear and respective RBI values
+    for given sites over a specified timeframe
 
 ``` r
 rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
@@ -122,28 +134,11 @@ rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 #> 10      1980      0.379      0.208
 ```
 
-3.  This returns a character vector with 15 observations that include
-    summary statistics from the Mann-Kendall and sens.slope analysis.
+#### Test time series trends
 
-``` r
-df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
-site_num = seq(from = 1, to= 2, by = .1))
-
-trendAnalysis(df$site_num)
-#>                    tau                     sl                      S 
-#>     "1.00000011920929" "2.62260437011719e-05"                   "55" 
-#>                      D                   varS  estimates.Sen's slope 
-#>     "54.9999961853027"                  "165"                  "0.1" 
-#>            statistic.z                p.value           null.value.z 
-#>     "4.20389429847222" "2.62361493945871e-05"                    "0" 
-#>            alternative              data.name                 method 
-#>            "two.sided"                    "x"          "Sen's slope" 
-#>            parameter.n              conf.int1              conf.int2 
-#>                   "11"                  "0.1"                  "0.1"
-```
-
-4.  This returns the Mann-Kendall and sens.slope summary statistics for
-    any given USGS gauge sites.
+-   To test the falshiness trends over time, `trends` returns the
+    Mann-Kendall and sens.slope summary statistics for any given USGS
+    gauge sites.
 
 ``` r
 data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
@@ -158,4 +153,42 @@ trends(x = data)
 #>     conf.int2
 #> 1 0.004216093
 #> 2 0.010844155
+```
+
+### Basin classification and data
+
+#### Basin ID
+
+-   Retrieve site classification (Reference and Non-reference sites) and
+    watershed area from USGS GAGES II.
+
+``` r
+basin_id(c("01567000", "01490000", "01492500"))
+#> Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (22%)Downloaded: 0.05 MB  (22%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (51%)Downloaded: 0.12 MB  (51%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.15 MB  (61%)Downloaded: 0.15 MB  (61%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (67%)Downloaded: 0.16 MB  (67%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.22 MB  (89%)Downloaded: 0.22 MB  (89%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (96%)Downloaded: 0.23 MB  (96%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)
+#> # A tibble: 3 × 10
+#>   STAID    STANAME      DRAIN_SQKM HUC02 LAT_GAGE LNG_GAGE STATE HCDN.2009 CLASS
+#>   <chr>    <chr>        <chr>      <chr> <chr>    <chr>    <chr> <chr>     <chr>
+#> 1 01490000 CHICAMACOMI… 40.6       02    38.5116… -75.879… MD    ""        Ref  
+#> 2 01492500 SALLIE HARR… 19.0       02    38.9648… -76.108… MD    ""        Ref  
+#> 3 01567000 Juniata Riv… 8657.3     02    40.4784… -77.129… PA    ""        Non-…
+#> # … with 1 more variable: AGGECOREGION <chr>
+```
+
+### Retrieve land use data
+
+#### Dam removals
+
+-   Retrieves dam removal data for specified sites directly from the
+    USGS Gages II website. This time series data recorded between
+    1931-01-01 and 2014-12-31.
+
+``` r
+dam_removal(c("01564500", "01567000"))
+#> Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
+#> # A tibble: 3 × 7
+#>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
+#>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
+#> 1 01567000           2004         40.7         -77.6 "Burnham" Tea Creek   PA   
+#> 2 01567000           2006         40.6         -77.7 "Lewisto… Strodes Run PA   
+#> 3 01567000           2011         40.7         -78.2 ""        Tributary … PA
 ```

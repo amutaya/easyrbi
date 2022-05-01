@@ -17,17 +17,19 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org/package=SDS270)
+[![R-CMD-check](https://github.com/wndlovu/easyrbi/workflows/R-CMD-check/badge.svg)](https://github.com/wndlovu/easyrbi/actions)
 <!-- badges: end -->
 
 
 ## Overview
 
-The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists of functions and datasets that can be used to calculate Richards-Baker Flashiness Index (RBI) trends over time for 301 sites. The main functions are:
+The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists of functions that retrieve streamflow data (pCode = 00060) from the [USGS website](https://waterservices.usgs.gov/rest/Site-Test-Tool.html), by using tools in the `dataRetrieval` package. Another set of functions can be used to calculate the Richards-Baker Flashiness Index (RBI) trends over time for any given gauge stations. The package also contains functions to download time series land use data [USGS Gages II](https://www.sciencebase.gov/catalog/item/59692a64e4b0d1f9f05fbd39) collected between 1931-01-01 and 2014-12-31. Some of the functions included in the package:
 
-1. The sitedata() function retrieves hydrology data for given USGS gauge sites for a specified period.
-2. rbi_df() returns calculated RBI values for given USGS sites for a specified period.
-3. The trendAnalysis() function perform the MannKendall and sens.slope analysis on a data frame with annual Richards-Baker Flashiness Index (RBI) values. 
-4. The trends() function then maps these summary statistics into a one data frame, adds an additional column with the site numbers and removes the summary statistics row for the year variable. The trends() function has the ability to return a data frame containing of length 301 which summary statistics for all 301 sites or a custom number of sites specified by the user.
+- `sitedata`: retrieves hydrology data for given USGS gauge sites for a specified period.
+- `rbi_df`: returns calculated RBI values for given USGS sites for a specified period.
+- `trends`: returns a data frame containing Mann-Kendall and sens.slope summary statistics for a custom number of sites specified by the user.
+- `basin_id`: Check the drainage area, eco-region and classification (reference or non-reference)
+- `dam_removal`: retrieves dam removal data from the USGS Gages II website for any number of given gauge station numbers.
 
 
 ## Installation
@@ -39,7 +41,7 @@ You can install the development version of easyrbi from Github:
 remotes::install_github("amutaya/easyrbi")
 ```
 
-## Example
+## Examples
 
 ```{r example, message=FALSE}
 library(easyrbi)
@@ -49,30 +51,40 @@ library(Kendall)
 library(dataRetrieval)
 library(usethis)
 ```
-1. This returns a data.frames with 18 variables from the USGS database which include discharge, drainage area and waterYear
+
+### Retrieve USGS gauge station data 
+
+#### Site data
+- Returns a data.frames with 18 variables from the USGS database which include discharge, drainage area and the waterYear.
 ```{r, eval = TRUE}
 sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>% 
   head(10)
 ```
-2. This returns a data.frames with 20 variables from the USGS database which include discharge, drainage area, waterYear and the RBI value
+
+#### Calculate the annul Richards Barker Flashiness Index (RBI) 
+- Returns a data.frames with the waterYear and respective RBI values for given sites over a specified timeframe
 ```{r, eval = TRUE}
 rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 ```
-3. This returns a character vector with 15 observations that include summary statistics from the Mann-Kendall and sens.slope analysis.
-```{r, eval=TRUE}
-df <- data.frame (year  = seq(from = 2010, to = 2020, by = 1),
-rbi = seq(from = 1, to= 2, by = .1))
-
-trendAnalysis(df$site_num)
-```
-4. This returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
+#### Test time series trends
+- To test the falshiness trends over time, `trends` returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
 ```{r, eval=TRUE}
 data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 trends(x = data) 
 ```
-5. Retrieve dam removal data for specified sites directly from the USGS Gages II website. This time series data recorded between 1931-01-01 and 2014-12-31.
-```{r}
+### Basin classification and data
+
+#### Basin ID
+- Retrieve site classification (Reference and Non-reference sites) and watershed area from USGS GAGES II.
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+basin_id(c("01567000", "01490000", "01492500"))
+```
+### Retrieve land use data
+
+#### Dam removals
+- Retrieves dam removal data for specified sites directly from the USGS Gages II website. This time series data recorded between 1931-01-01 and 2014-12-31.
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
 dam_removal(c("01564500", "01567000"))
 ```
 
