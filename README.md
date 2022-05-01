@@ -13,12 +13,15 @@ status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org
 ## Overview
 
 The [`easyrbi`](https://github.com/amutaya/easyrbi) R package consists
-of functions that retrieve streamflow data from the USGS website, by
-using tools in `dataRetrieval` package and calculate the Richards-Baker
-Flashiness Index (RBI) trends over time for any given gauge stations.
-The package also contains functions to download time series land use
-data (USGS Gages II) collected between 1931-01-01 and 2014-12-31. Some
-of the functions included in the package:
+of functions that retrieve streamflow data (pCode = 00060) from the
+[USGS website](https://waterservices.usgs.gov/rest/Site-Test-Tool.html),
+by using tools in the `dataRetrieval` package. Another set of functions
+can be used to calculate the Richards-Baker Flashiness Index (RBI)
+trends over time for any given gauge stations. The package also contains
+functions to download time series land use data [USGS Gages
+II](https://www.sciencebase.gov/catalog/item/59692a64e4b0d1f9f05fbd39)
+collected between 1931-01-01 and 2014-12-31. Some of the functions
+included in the package:
 
 -   `sitedata`: retrieves hydrology data for given USGS gauge sites for
     a specified period.
@@ -27,6 +30,8 @@ of the functions included in the package:
 -   `trends`: returns a data frame containing Mann-Kendall and
     sens.slope summary statistics for a custom number of sites specified
     by the user.
+-   `basin_id`: Check the drainage area, eco-region and classification
+    (reference or non-reference)
 -   `dam_removal`: retrieves dam removal data from the USGS Gages II
     website for any number of given gauge station numbers.
 
@@ -51,7 +56,9 @@ library(dataRetrieval)
 library(usethis)
 ```
 
-#### Retrieve USGS gauge station data
+### Retrieve USGS gauge station data
+
+#### Site data
 
 -   Returns a data.frames with 18 variables from the USGS database which
     include discharge, drainage area and the waterYear.
@@ -105,7 +112,7 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 #> 10      1971
 ```
 
-#### Calculate the annul Richard’s Barker Index (RBI)
+#### Calculate the annul Richards Barker Flashiness Index (RBI)
 
 -   Returns a data.frames with the waterYear and respective RBI values
     for given sites over a specified timeframe
@@ -129,8 +136,9 @@ rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 #### Test time series trends
 
--   Returns the Mann-Kendall and sens.slope summary statistics for any
-    given USGS gauge sites.
+-   To test the falshiness trends over time, `trends` returns the
+    Mann-Kendall and sens.slope summary statistics for any given USGS
+    gauge sites.
 
 ``` r
 data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
@@ -147,7 +155,28 @@ trends(x = data)
 #> 2 0.010844155
 ```
 
-#### Retrieve land use data
+### Basin classification and data
+
+#### Basin ID
+
+-   Retrieve site classification (Reference and Non-reference sites) and
+    watershed area from USGS GAGES II.
+
+``` r
+basin_id(c("01567000", "01490000", "01492500"))
+#> Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (22%)Downloaded: 0.05 MB  (22%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (51%)Downloaded: 0.12 MB  (51%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.15 MB  (61%)Downloaded: 0.15 MB  (61%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (67%)Downloaded: 0.16 MB  (67%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.22 MB  (89%)Downloaded: 0.22 MB  (89%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (96%)Downloaded: 0.23 MB  (96%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)
+#> # A tibble: 3 × 10
+#>   STAID    STANAME      DRAIN_SQKM HUC02 LAT_GAGE LNG_GAGE STATE HCDN.2009 CLASS
+#>   <chr>    <chr>        <chr>      <chr> <chr>    <chr>    <chr> <chr>     <chr>
+#> 1 01490000 CHICAMACOMI… 40.6       02    38.5116… -75.879… MD    ""        Ref  
+#> 2 01492500 SALLIE HARR… 19.0       02    38.9648… -76.108… MD    ""        Ref  
+#> 3 01567000 Juniata Riv… 8657.3     02    40.4784… -77.129… PA    ""        Non-…
+#> # … with 1 more variable: AGGECOREGION <chr>
+```
+
+### Retrieve land use data
+
+#### Dam removals
 
 -   Retrieves dam removal data for specified sites directly from the
     USGS Gages II website. This time series data recorded between
