@@ -71,16 +71,15 @@ data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 trends(x = data) 
 ```
+#### Get basin ID data 
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+basin_id(c("01567000", "01490000", "01492500"))
+```
 #### Retrieve land use data
 - Retrieves dam removal data for specified sites directly from the USGS Gages II website. This time series data recorded between 1931-01-01 and 2014-12-31.
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
 dam_removal(c("01564500", "01567000"))
 ```
-#### Get basin ID data 
-```{r, eval=TRUE, warning=FALSE, message=FALSE}
-basin_id(c("01567000", "01490000", "01492500"))
-```
-
 #### Investigate the trends at sites where dams were removed.
 - For any given gauge stations, check if there is a relationship between trends and dam removals 
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}

@@ -71,9 +71,8 @@ basin_id <- function(site_num){
 
   )
 
-  basins <- read.table("Dataset1_BasinID/BasinID.txt",sep=",",header=T) %>%
-    mutate(STAID = as.character(paste0("0", STAID))) %>%
-    filter(STAID == site_num) %>%
+  basins <- read.table("Dataset1_BasinID/BasinID.txt",sep=",",header=TRUE) %>%
+    filter(STAID %in% c(site_num)) %>%
     as_tibble()
   return(basins)
 }

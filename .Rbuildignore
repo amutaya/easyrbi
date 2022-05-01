@@ -7,3 +7,6 @@
 ^data-raw$
 ^Dataset3_DamRemovals$
 ^Dataset3_DamRemovals\.zip$
+^Dataset1_BasinID$
+^Dataset1_BasinID\.zip$
+^\.github$
