@@ -33,7 +33,7 @@ sitedata <- function(site_num,startDate, endDate){
 #' Calculate the Richard Baker Index (RBI) for given sites
 #' rbi
 #'
-#' @param q a dataframe containing the daily discharge data measured in mm_day
+#' @param q a dataframe containing the daily discharge data.
 #' @export
 #'
 #' @import dplyr

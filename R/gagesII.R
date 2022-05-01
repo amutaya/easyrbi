@@ -63,11 +63,15 @@ dam_trends <- function(site_num, startDate, endDate){
 #' basin_id(c("01567000", "01490000", "01492500"))
 #'
 basin_id <- function(site_num){
+  if (nchar(site_num) < 8){
+    stop("Invalid site number")
+  } else{
+
+
   basin_url <- "https://www.sciencebase.gov/catalog/file/get/59692a64e4b0d1f9f05fbd39?f=__disk__3b%2F5c%2F06%2F3b5c0605384344f93b61c00fccf1a304b96019e3"
   basin_data <- use_zip(
     basin_url,
-    destdir = getwd(),
-    cleanup = if (rlang::is_interactive()) NA else FALSE
+    destdir = getwd()
 
   )
 
@@ -75,5 +79,6 @@ basin_id <- function(site_num){
     filter(STAID %in% c(site_num)) %>%
     as_tibble()
   return(basins)
+  }
 }
 
