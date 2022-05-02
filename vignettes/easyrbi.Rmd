@@ -105,16 +105,16 @@ The `easyrbi` package also help you get a better understanding of the impacts of
 ```
 
 
-## Caculate the RBI values for given sites
+### Calculate the RBI values for given sites
 The flashiness of a stream reflects how quickly flow in a river or stream increases and decreases during a storm. One of the most important statistics hydrologists are interested in is the change in the short term daily flows relative to average yearly flows. This is what is known as the Richard Baker's Flashiness Index (RBI). For any given site or sites, the `rbi_df` function in this `easyrbi` package will output the respective rbi values for each site and the corresponding water year over a given time period. The function will take in the site numbers, the start and end date as characters and return a data frame. 
 
-### Example 1
+#### Example 1
 - Get the rbi values for one specified site
 ```{r}
 rbi_df("01564500", "1970-10-01", "1980-09-30")
 ```
 
-### Example 2
+#### Example 2
 - Returns the rbi values for multiple specified sites
 ```{r}
 rbi_df(c("01564500", "01567000", "01052500", "01038000"), "1970-10-01", "1980-09-30")
