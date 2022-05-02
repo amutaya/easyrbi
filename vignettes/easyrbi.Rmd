@@ -111,13 +111,13 @@ The flashiness of a stream reflects how quickly flow in a river or stream increa
 #### Example 1
 - Get the rbi values for one specified site
 ```{r}
-rbi_df("01564500", "1970-10-01", "1980-09-30")
+#rbi_df("01564500", "1970-10-01", "1980-09-30")
 ```
 
 #### Example 2
 - Returns the rbi values for multiple specified sites
 ```{r}
-rbi_df(c("01564500", "01567000", "01052500", "01038000"), "1970-10-01", "1980-09-30")
+#rbi_df(c("01564500", "01567000", "01052500", "01038000"), "1970-10-01", "1980-09-30")
 ```
 
 
