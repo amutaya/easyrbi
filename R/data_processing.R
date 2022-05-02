@@ -1,5 +1,5 @@
 #' Retrieve hydrology data from the USGS website for given sites and duration
-#' sitedata
+#'
 #'
 #' @param site_num a "character" vector that contains the study site numbers.
 #' @param startDate a "date" following the Y-m-d format.

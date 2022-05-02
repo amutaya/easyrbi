@@ -1,5 +1,5 @@
-#' Calculate the sens.slope and MannKendall values
-#'trendAnalysis
+#' Calculate the sens.slope and MannKendall values for any time series
+#'
 #'
 #' @param x a list of type spec_tbl_df/tbl_df/tbl/data.frame that has one column with consecutive times of class 'numeric'. The time variable can also be a 'Date' class.
 #'
@@ -27,7 +27,7 @@ trendAnalysis <- function(x){
 
 
 
-#' Returns the results from trendAnalysis as a dataframe
+#' Create a dataframe containing summary statistics from the MannKendall and sens.slope analysis for set of USGS gauge stations over given duration.
 #' trends
 #'
 #' @param x a data.frame containing the waterYear and RBI values for sites in one column.
