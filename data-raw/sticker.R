@@ -1,4 +1,8 @@
 library(ggthemes)
+library(ggplot2)
+library(hexSticker)
+library(magick)
+
 site_discharge <- sitedata("01567000", "1970-10-01", "1971-10-01")
 
 s <- ggplot(data = site_discharge, aes(x = Date, y = mm_day))+
