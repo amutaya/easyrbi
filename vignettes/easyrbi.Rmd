@@ -1,0 +1,49 @@
+---
+title: "`easyrbi`: A Package for retrieving USGS gauges station and landuse data, and calculating stream flashiness"
+author: "Wayne Ndlovu and Annah Mutaya"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{`easyrbi`: A Package for retrieving USGS gauges station and landuse data, and calculating stream flashiness}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+tags:
+  - R
+  - Rstats
+  - tidyverse
+  - dataRetrieval
+  - easyrbi
+authors:
+  - name: Wayne Ndlovu
+  - name: Annah Mutaya
+output:
+  rmarkdown::html_vignette:
+    df_print: default
+    number_sections: no
+---
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(dataRetrieval)
+library(easyrbi)
+library(trend)
+library(Kendall)
+library(usethis)
+```
+
+The `easyrbi` package 
+
+
+
+
+
+
+#### Investigate the trends at sites where dams were removed.
+- For any given gauge stations, check if there is a relationship between trends and dam removals 
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
+```

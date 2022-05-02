@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_processing.R
 \name{sitedata}
 \alias{sitedata}
-\title{Retrieve hydrology from the USGS website for given sites and duration
+\title{Retrieve hydrology data from the USGS website for given sites and duration
 sitedata}
 \usage{
 sitedata(site_num, startDate, endDate)
@@ -18,7 +18,7 @@ sitedata(site_num, startDate, endDate)
 returns a data.frame with 18 variables.
 }
 \description{
-Retrieve hydrology from the USGS website for given sites and duration
+Retrieve hydrology data from the USGS website for given sites and duration
 sitedata
 }
 \examples{
