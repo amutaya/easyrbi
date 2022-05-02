@@ -35,11 +35,14 @@ library(Kendall)
 library(usethis)
 ```
 
-The `easyrbi` package 
+
+### Summary
+The `easyrbi` package is made with users and hydrologists who are interested in studying stream discharge data in mind. The package contains functions that retrieve streamflow data (pCode = 00060) from the [USGS website](https://waterservices.usgs.gov/rest/Site-Test-Tool.html) and dam removal time series data from [USGS Gages II](https://www.sciencebase.gov/catalog/item/59692a64e4b0d1f9f05fbd39) collected between 1931-01-01 and 2014-12-31.
 
 
 
-
+anna - rbi_df, site_data, trends
+wayne - basin id, dam_removal, dam_trends
 
 
 #### Investigate the trends at sites where dams were removed.
