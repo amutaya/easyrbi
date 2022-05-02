@@ -2,8 +2,7 @@
 % Please edit documentation in R/data_processing.R
 \name{rbi}
 \alias{rbi}
-\title{Calculate the Richard Baker Index (RBI) for given sites
-rbi}
+\title{Calculate the Richards Baker Flashiness Index (RBI) for given gauge stations}
 \usage{
 rbi(q)
 }
@@ -11,6 +10,5 @@ rbi(q)
 \item{q}{a dataframe containing the daily discharge data.}
 }
 \description{
-Calculate the Richard Baker Index (RBI) for given sites
-rbi
+Calculate the Richards Baker Flashiness Index (RBI) for given gauge stations
 }

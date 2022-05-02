@@ -2,8 +2,7 @@
 % Please edit documentation in R/data_processing.R
 \name{rbi_df}
 \alias{rbi_df}
-\title{Add calculated RBI value to the data.frame
-rbi_df}
+\title{Create a dataframe with the calculated annual Richards Baker Flashiness Index (RBI) for specified sites and duration}
 \usage{
 rbi_df(site_num, startDate, endDate)
 }
@@ -18,8 +17,7 @@ rbi_df(site_num, startDate, endDate)
 returns a data.frame with the waterYear variable and RBI values for specified sites saved in columns.
 }
 \description{
-Add calculated RBI value to the data.frame
-rbi_df
+Create a dataframe with the calculated annual Richards Baker Flashiness Index (RBI) for specified sites and duration
 }
 \examples{
 # return a dataframe with annual RBI values for specified USGS gauge sites over specified duration
