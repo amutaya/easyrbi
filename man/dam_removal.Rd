@@ -2,7 +2,7 @@
 % Please edit documentation in R/gagesII.R
 \name{dam_removal}
 \alias{dam_removal}
-\title{Retrieve dam removal time series data the USGS Gages II website.}
+\title{Retrieve dam removal time series data from the USGS Gages II website.}
 \usage{
 dam_removal(site_num)
 }
@@ -13,7 +13,7 @@ dam_removal(site_num)
 returns a data frame with 7 variables which includes the year when the dam was removed and the site location.
 }
 \description{
-Retrieve dam removal time series data the USGS Gages II website.
+Retrieve dam removal time series data from the USGS Gages II website.
 }
 \examples{
 # returns a dataframe with the dam removals for specified sites.
