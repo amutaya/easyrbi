@@ -38,7 +38,7 @@ dam_removal <- function(site_num){
 #' @return returns a dataframe with 21 variables which include the dams removed and corresponding summary statistics from the sens.Slope and Kendall analysis.
 #' @export
 #'
-#' @example
+#' @examples
 #' # returns RBI summary statistics and dam removal data for given sites over the specified period
 #' library(easyrbi)
 #' dam_trends("01567000", "1970-10-01", "1990-09-30")
@@ -57,7 +57,7 @@ dam_trends <- function(site_num, startDate, endDate){
 #' @return returns a data frame with 10 variables which includes the drainage area and site classification
 #' @export
 #'
-#' @example
+#' @examples
 #' returns the basin ID data for specified sites
 #' library(easyrbi)
 #' basin_id(c("01567000", "01490000", "01492500"))
