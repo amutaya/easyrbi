@@ -37,7 +37,7 @@ library(usethis)
 
 
 ## Summary
-The `easyrbi` package is made with users and hydrologists who are interested in studying stream discharge data in mind. The package contains functions that retrieve streamflow data (pCode = 00060) from the [USGS website](https://waterservices.usgs.gov/rest/Site-Test-Tool.html) and dam removal time series data from [USGS Gages II](https://www.sciencebase.gov/catalog/item/59692a64e4b0d1f9f05fbd39) collected between 1931-01-01 and 2014-12-31.
+The `easyrbi` package is made with users and hydrologists who are interested in studying stream discharge data in mind. The package contains functions that retrieve streamflow data (pCode = 00060) from the [USGS website](https://waterservices.usgs.gov/rest/Site-Test-Tool.html) and dam removal time series data from [USGS Gages II](https://www.sciencebase.gov/catalog/item/59692a64e4b0d1f9f05fbd39) collected between 1931-01-01 and 2014-12-31. All functions return tidy dataframes which are easy to work with.
 
 
 ## Introduction
@@ -53,13 +53,16 @@ library(trend)
 library(Kendall)
 library(dataRetrieval)
 library(usethis)
+
+# create sample sites
+study_sites <- c("01564500", "01567000", "01567500", "01568000", "01570000", "01571500", "01573000", "01574000", "01574500", "01576500")
 ```
 
 
 ## Uses
 
 ### Watershed Identification
-Ever wondered how large the watershed you are studying is? Or whether the watershed is consired a reference or non-refence site? For any given site numbers, the `basin_id` function generates a dataframe that consists of the watershed identification information as provided by the U.S. Geological Survey (USGS) Geospatial Attributes of Gages for Evaluating Streamflow II (GAGES-II) dataset. 
+Ever wondered how large the watershed you are studying is? Or whether the watershed is consired a reference or non-refence site? For any given site numbers, the `basin_id` function generates a dataframe that consists of the watershed identification information as provided by the U.S. Geological Survey (USGS) Geospatial Attributes of Gages for Evaluating Streamflow II (GAGES-II) dataset. The `basin_id` function is interactive, so you can choose to overwrite previously downloaded data files.
 
 #### Example 1
 ```{r}
@@ -68,18 +71,28 @@ basin_id(c("01567000", "01490000", "01492500"))
 
 #### Example 2
 ```{r}
-study_sites <- c("01564500", "01567000", "01567500", "01568000", "01570000", "01571500", "01573000", "01574000", "01574500", "01576500")
-
 basin_id(study_sites)
 ```
 
+### How many dams have been removed close to your study sites?
+`easyrbi` allows the user to also download dam removal data recorded between 1931 and 2014 using a simple function that only takes in the site number(s) as an argument. The `dam_removal` function is also interactive, so you can choose to overwrite previously downloaded data files.
+
+#### Example 1
+```{r}
+dam_removal("01066000")
+```
+
+#### Example 2
+```{r}
+dam_removal(study_sites)
+```
 
 anna - rbi_df, site_data, trends
 wayne - basin id, dam_removal, dam_trends
 
 
 #### Investigate the trends at sites where dams were removed.
-- For any given gauge stations, check if there is a relationship between trends and dam removals 
+- To understand the impacts of dam removals on stream flashinessFor any given gauge stations, check if there is a relationship between trends and dam removals 
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
 dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
 ```
