@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-### easyrbi R Package
+
+### easyrbi R Package <img src='data-raw/easyrbiHex.png' align="right" height="139"/>
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -87,5 +88,6 @@ basin_id(c("01567000", "01490000", "01492500"))
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
 dam_removal(c("01564500", "01567000"))
 ```
+
 
 

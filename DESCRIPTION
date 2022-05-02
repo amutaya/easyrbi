@@ -1,6 +1,6 @@
 Package: easyrbi
 Title: Calculates Richard's Baker Index Value for USGS Stream Sites
-Version: 0.0.0.9069
+Version: 0.0.0.9075
 Authors@R: c( 
     person("Wayne", "Ndlovu", email = "waynedndlovu5@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "")), 
@@ -13,6 +13,8 @@ Depends:
     R (>= 3.4.0)
 License: MIT + file LICENSE
 Suggests: 
+    rmarkdown,
+    knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
@@ -31,3 +33,4 @@ Imports:
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 LazyData: true
+VignetteBuilder: knitr
