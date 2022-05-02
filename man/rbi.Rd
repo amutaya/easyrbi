@@ -8,7 +8,7 @@ rbi}
 rbi(q)
 }
 \arguments{
-\item{q}{a dataframe containing the daily discharge data measured in mm_day}
+\item{q}{a dataframe containing the daily discharge data.}
 }
 \description{
 Calculate the Richard Baker Index (RBI) for given sites

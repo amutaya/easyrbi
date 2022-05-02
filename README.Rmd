@@ -76,7 +76,7 @@ trends(x = data)
 ```
 ### Basin classification and data
 
-#### Basin ID
+#### Watershed Identification
 - Retrieve site classification (Reference and Non-reference sites) and watershed area from USGS GAGES II.
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
 basin_id(c("01567000", "01490000", "01492500"))

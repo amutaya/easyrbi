@@ -1,4 +1,4 @@
-#' Retrieve dam removal time series data the USGS Gages II website.
+#' Retrieve dam removal time series data from the USGS Gages II website.
 #'
 #' @param site_num a "character" vector that contains the study site numbers.
 #' @return returns a data frame with 7 variables which includes the year when the dam was removed and the site location.
@@ -30,7 +30,7 @@ dam_removal <- function(site_num){
   return(dams)
 }
 
-#' Retrieve dam removal and hydrology data from the USGS and USGS Gages II websites.
+#' Create a dataframe containing dam removal and hydrology data from the USGS and USGS GAGES II websites.
 #'
 #' @param site_num a "character" vector that contains the study site numbers.
 #' @param startDate a "date" following the Y-m-d format.
@@ -51,7 +51,7 @@ dam_trends <- function(site_num, startDate, endDate){
   return(dam_trends_df)
 }
 
-#' Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II
+#' Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II website.
 #'
 #' @param site_num a "character" vector that contains the study site numbers.
 #' @return returns a data frame with 10 variables which includes the drainage area and site classification

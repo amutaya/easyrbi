@@ -2,8 +2,7 @@
 % Please edit documentation in R/gagesII.R
 \name{dam_trends}
 \alias{dam_trends}
-\title{Retrieve dam removal and hydrology data from the USGS and USGS Gages II websites for given sites over a specified period. The dataframe contains calculated RBI summary statistics and dam removal time series data recorded between 1931-01-01 and 2014-12-31.
-dam_trends}
+\title{Retrieve dam removal and hydrology data from the USGS and USGS Gages II websites.}
 \usage{
 dam_trends(site_num, startDate, endDate)
 }
@@ -18,6 +17,5 @@ dam_trends(site_num, startDate, endDate)
 returns a dataframe with 21 variables which include the dams removed and corresponding summary statistics from the sens.Slope and Kendall analysis.
 }
 \description{
-Retrieve dam removal and hydrology data from the USGS and USGS Gages II websites for given sites over a specified period. The dataframe contains calculated RBI summary statistics and dam removal time series data recorded between 1931-01-01 and 2014-12-31.
-dam_trends
+Retrieve dam removal and hydrology data from the USGS and USGS Gages II websites.
 }
