@@ -65,34 +65,38 @@ study_sites <- c("01564500", "01567000", "01567500", "01568000", "01570000", "01
 Ever wondered how large the watershed you are studying is? Or whether the watershed is consired a reference or non-refence site? For any given site numbers, the `basin_id` function generates a dataframe that consists of the watershed identification information as provided by the U.S. Geological Survey (USGS) Geospatial Attributes of Gages for Evaluating Streamflow II (GAGES-II) dataset. The `basin_id` function is interactive, so you can choose to overwrite previously downloaded data files.
 
 #### Example 1
-```{r}
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
 basin_id(c("01567000", "01490000", "01492500"))
 ```
 
 #### Example 2
-```{r}
-basin_id(study_sites)
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+#basin_id(study_sites)
 ```
 
 ### How many dams have been removed close to your study sites?
 `easyrbi` allows the user to also download dam removal data recorded between 1931 and 2014 using a simple function that only takes in the site number(s) as an argument. The `dam_removal` function is also interactive, so you can choose to overwrite previously downloaded data files.
 
 #### Example 1
-```{r}
-dam_removal("01066000")
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+#dam_removal("01066000")
+```
+
+#### Example 2
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+#dam_removal(study_sites)
+```
+
+### Investigate the trends at sites where dams were removed.
+The `easyrbi` package also help you get a better understanding of the impacts of dam removals on stream flashiness. For any given gauge stations, check if there is a relationship between stream flashiness trends and dam removals.
+
+#### Example 1
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+#dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
 ```
 
 #### Example 2
 ```{r}
-dam_removal(study_sites)
+#dam_trends(study_sites)
 ```
 
-anna - rbi_df, site_data, trends
-wayne - basin id, dam_removal, dam_trends
-
-
-#### Investigate the trends at sites where dams were removed.
-- To understand the impacts of dam removals on stream flashinessFor any given gauge stations, check if there is a relationship between trends and dam removals 
-```{r, eval=TRUE, warning=FALSE, message=FALSE}
-dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
-```
