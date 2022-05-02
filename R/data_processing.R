@@ -30,8 +30,8 @@ sitedata <- function(site_num,startDate, endDate){
 }
 
 
-#' Calculate the Richard Baker Index (RBI) for given sites
-#' rbi
+#' Calculate the Richards Baker Flashiness Index (RBI) for given gauge stations
+#'
 #'
 #' @param q a dataframe containing the daily discharge data.
 #' @export
@@ -48,8 +48,8 @@ rbi <- function(q){
   #in daily discharge/sum of daily discharge)
 }
 
-#' Add calculated RBI value to the data.frame
-#' rbi_df
+#' Create a dataframe with the calculated annual Richards Baker Flashiness Index (RBI) for specified sites and duration
+#'
 #'
 #' @param site_num a "character" vector that contains the study site numbers.
 #' @param startDate a "date" following the Y-m-d format.
