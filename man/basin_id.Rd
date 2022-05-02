@@ -2,7 +2,7 @@
 % Please edit documentation in R/gagesII.R
 \name{basin_id}
 \alias{basin_id}
-\title{Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II}
+\title{Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II website.}
 \usage{
 basin_id(site_num)
 }
@@ -13,5 +13,5 @@ basin_id(site_num)
 returns a data frame with 10 variables which includes the drainage area and site classification
 }
 \description{
-Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II
+Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II website.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sumstats.R
 \name{trends}
 \alias{trends}
-\title{Returns the results from trendAnalysis as a dataframe
+\title{Create a dataframe containing summary statistics from the MannKendall and sens.slope analysis for set of USGS gauge stations over given duration.
 trends}
 \usage{
 trends(x)
@@ -14,7 +14,7 @@ trends(x)
 returns a list/data.frame with 15 variables calculated using trendAnalysis. The data.frame has 3 columns that are character vectors and 12 that are numeric.
 }
 \description{
-Returns the results from trendAnalysis as a dataframe
+Create a dataframe containing summary statistics from the MannKendall and sens.slope analysis for set of USGS gauge stations over given duration.
 trends
 }
 \examples{

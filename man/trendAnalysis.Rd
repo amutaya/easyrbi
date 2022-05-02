@@ -2,8 +2,7 @@
 % Please edit documentation in R/sumstats.R
 \name{trendAnalysis}
 \alias{trendAnalysis}
-\title{Calculate the sens.slope and MannKendall values
-trendAnalysis}
+\title{Calculate the sens.slope and MannKendall values for any time series}
 \usage{
 trendAnalysis(x)
 }
@@ -11,8 +10,7 @@ trendAnalysis(x)
 \item{x}{a list of type spec_tbl_df/tbl_df/tbl/data.frame that has one column with consecutive times of class 'numeric'. The time variable can also be a 'Date' class.}
 }
 \description{
-Calculate the sens.slope and MannKendall values
-trendAnalysis
+Calculate the sens.slope and MannKendall values for any time series
 }
 \examples{
 # site_num is a numeric variable containing rbi values over consecutive years (year)
