@@ -121,6 +121,17 @@ The flashiness of a stream reflects how quickly flow in a river or stream increa
 ```
 
 
+## Retrieve the site trends over time
+After one has obtained the rbi values for their different sites, they can also use the `trends` function to get the summary statistics for the any of the USGS gauge sites. Among these are the sens.slope and the Mann-Kendall values for the sites. The function takes in the data frame produced by `rbi_df` and returns the corresponding summary statistics for each site. 
+
+### Example 
+- For each site, the function returns 14 different summary statistics.
+```{r}
+ex_data <- rbi_df(c("01038000", "01567000", "01052500"), "1970-10-01", "1980-09-30")
+
+trends(x = ex_data) 
+```
+
 ## Retrieve USGS gauge sites data
 Hydrologists might want more information on a given site or sites for further analysis. The `sitedata` function provides more data for a specified site or sites that includes drainage per day, the drainage area and the corresponding water year. This function is more important when one wants more geological information about the sites over a given time period as it also provides actual site names, the state of the sites and their physical coordinates. 
 

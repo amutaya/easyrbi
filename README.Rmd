@@ -63,12 +63,12 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 ```
 
 #### Calculate the annul Richards Barker Flashiness Index (RBI) 
-- Returns a data.frames with the waterYear and respective RBI values for given sites over a specified timeframe
+- Returns a data frame with the waterYear and respective RBI values for given sites over a specified time frame
 ```{r, eval = TRUE}
 rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 ```
 #### Test time series trends
-- To test the falshiness trends over time, `trends` returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
+- To test the flashiness trends over time, `trends` returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
 ```{r, eval=TRUE}
 data <- rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
