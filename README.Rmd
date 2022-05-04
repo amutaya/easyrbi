@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 ### easyrbi R Package <img src='data-raw/easyrbiHex.png' align="right" height="139"/>
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org/package=SDS270)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/wndlovu/easyrbi/workflows/R-CMD-check/badge.svg)](https://github.com/wndlovu/easyrbi/actions)
+[![CRAN status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org/package=SDS270)
 <!-- badges: end -->
 
 
