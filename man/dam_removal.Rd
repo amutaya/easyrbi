@@ -18,5 +18,7 @@ Retrieve dam removal time series data from the USGS Gages II website.
 \examples{
 # returns a dataframe with the dam removals for specified sites.
 library(easyrbi)
-dam_removal("01034500")
+study_sites <- c("01564500", "01567000", "01567500", "01568000",
+"01570000", "01571500", "01573000", "01574000", "01574500", "01576500")
+dam_removal(study_sites)
 }

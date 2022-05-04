@@ -19,3 +19,9 @@ returns a dataframe with 21 variables which include the dams removed and corresp
 \description{
 Create a dataframe containing dam removal and hydrology data from the USGS and USGS GAGES II websites.
 }
+\examples{
+# returns RBI summary statistics and dam removal data for given sites over the specified period
+library(easyrbi)
+dam_trends("01567000", "1970-10-01", "1990-09-30")
+
+}
