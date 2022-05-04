@@ -15,3 +15,9 @@ returns a data frame with 10 variables which includes the drainage area and site
 \description{
 Retrieve site classification (Reference and Non-reference sites) from USGS GAGES II website.
 }
+\examples{
+# returns the identification of the basin for specified sites
+library(easyrbi)
+basin_id(c("01567000", "01490000", "01492500"))
+
+}
