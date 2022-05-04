@@ -3,7 +3,7 @@
 \docType{data}
 \name{rbiWy_dfAll}
 \alias{rbiWy_dfAll}
-\title{Calculated RBI data for 301 sites USGS sites data}
+\title{Calculated RBI values for an example dataset containing 301 USGS sites.}
 \format{
 A data frame of 15050 rows and 3 columns.
 \describe{
@@ -16,7 +16,6 @@ A data frame of 15050 rows and 3 columns.
 rbiWy_dfAll
 }
 \description{
-RBI values are calculated for 301 USGS sites and stored in the dataframe. This data frame contains water year and annual RBI value for each site. Each column
-from 01011000 to 01576500 contains RBI values for each site.
+The data frame contains the annual RBI values.
 }
 \keyword{datasets}
