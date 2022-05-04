@@ -4,10 +4,10 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/wndlovu/easyrbi/workflows/R-CMD-check/badge.svg)](https://github.com/wndlovu/easyrbi/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/SDS270)](https://CRAN.R-project.org/package=SDS270)
-[![R-CMD-check](https://github.com/wndlovu/easyrbi/workflows/R-CMD-check/badge.svg)](https://github.com/wndlovu/easyrbi/actions)
 <!-- badges: end -->
 
 ## Overview
