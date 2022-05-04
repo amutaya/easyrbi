@@ -191,7 +191,7 @@ dam_removal(c("01564500", "01567000"))
 #> 3 01567000           2011         40.7         -78.2 ""        Tributary … PA
 ```
 
-#### Dam trends
+#### Dam removals and flashiness trends
 
 -   To check if there is a relationship between trends and dam removals,
     `dam_trends` returns a dataframe with dam removals and trends
