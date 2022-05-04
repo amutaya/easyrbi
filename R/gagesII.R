@@ -14,21 +14,44 @@
 #' library(easyrbi)
 #' dam_removal("01034500")
 
+#dam_removal <- function(site_num){
+  #dam_url <- "https://www.sciencebase.gov/catalog/file/get/59692a64e4b0d1f9f05fbd39?f=__disk__c9%2F40%2Ff2%2Fc940f2f914e04b26bf0e81d81c9f273113f7a5c8"
+  #dam_data <- use_zip(
+    #dam_url,
+    #destdir = getwd(),
+    #cleanup = if (rlang::is_interactive()) NA else FALSE
+  #)
+
+  #dams <- read.table("Dataset3_DamRemovals/DamRemovals.txt",sep=",",header=T) %>%
+    #mutate(STAID = as.character(paste0("0", STAID))) %>%
+    #filter(STAID == site_num) %>%
+    #as_tibble()
+  #return(dams)
+#}
+
 dam_removal <- function(site_num){
   dam_url <- "https://www.sciencebase.gov/catalog/file/get/59692a64e4b0d1f9f05fbd39?f=__disk__c9%2F40%2Ff2%2Fc940f2f914e04b26bf0e81d81c9f273113f7a5c8"
-  dam_data <- use_zip(
-    dam_url,
-    destdir = getwd(),
-    cleanup = if (rlang::is_interactive()) NA else FALSE
 
-  )
-
-  dams <- read.table("Dataset3_DamRemovals/DamRemovals.txt",sep=",",header=T) %>%
-    mutate(STAID = as.character(paste0("0", STAID))) %>%
-    filter(STAID == site_num) %>%
-    as_tibble()
-  return(dams)
+  if (!dir.exists("Dataset3_DamRemovals")){
+    dam_data <- use_zip(
+      dam_url,
+      destdir = getwd()#,
+      #cleanup = if (rlang::is_interactive()) NA else FALSE
+    )
+    dams <- read.table("Dataset3_DamRemovals/DamRemovals.txt",sep=",",header=T) %>%
+      mutate(STAID = as.character(paste0("0", STAID))) %>%
+      filter(STAID == site_num) %>%
+      as_tibble()
+    return(dams)
+  } else {
+    dams2 <- read.table("Dataset3_DamRemovals/DamRemovals.txt",sep=",",header=T) %>%
+      mutate(STAID = as.character(paste0("0", STAID))) %>%
+      filter(STAID == site_num) %>%
+      as_tibble()
+    return(dams2)
+  }
 }
+
 
 #' Create a dataframe containing dam removal and hydrology data from the USGS and USGS GAGES II websites.
 #'
@@ -38,7 +61,7 @@ dam_removal <- function(site_num){
 #' @return returns a dataframe with 21 variables which include the dams removed and corresponding summary statistics from the sens.Slope and Kendall analysis.
 #' @export
 #'
-#' @example
+#' @examples
 #' # returns RBI summary statistics and dam removal data for given sites over the specified period
 #' library(easyrbi)
 #' dam_trends("01567000", "1970-10-01", "1990-09-30")
@@ -58,7 +81,7 @@ dam_trends <- function(site_num, startDate, endDate){
 #' @export
 #'
 #' @example
-#' returns the basin ID data for specified sites
+#' returns the identification of the basin for specified sites
 #' library(easyrbi)
 #' basin_id(c("01567000", "01490000", "01492500"))
 #'

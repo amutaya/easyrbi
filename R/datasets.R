@@ -9,5 +9,5 @@
 #'    \item{site_no}{USGS gauge site number}
 #'    \item{rbi}{annual RBI values for the 301 study sites}
 #' }
-#' @ source
+#' @source
 "rbiWy_dfAll"

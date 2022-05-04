@@ -79,7 +79,7 @@ Ever wondered how large the watershed you are studying is? Or whether the waters
 
 ### Example 1
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
-#dam_removal("01066000")
+dam_removal("01066000")
 ```
 
 annah - rbi_df, site_data, trends
@@ -96,7 +96,7 @@ The `easyrbi` package also help you get a better understanding of the impacts of
 ### Example 1
 - For any given gauge stations, check if there is a relationship between trends and dam removals 
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
-#dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
+dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
 ```
 
 ### Example 2
