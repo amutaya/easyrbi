@@ -114,8 +114,8 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 
 #### Calculate the annul Richards Barker Flashiness Index (RBI)
 
--   Returns a data.frames with the waterYear and respective RBI values
-    for given sites over a specified timeframe
+-   Returns a data frame with the waterYear and respective RBI values
+    for given sites over a specified time frame
 
 ``` r
 rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
@@ -136,7 +136,7 @@ rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 
 #### Test time series trends
 
--   To test the falshiness trends over time, `trends` returns the
+-   To test the flashiness trends over time, `trends` returns the
     Mann-Kendall and sens.slope summary statistics for any given USGS
     gauge sites.
 
@@ -157,14 +157,13 @@ trends(x = data)
 
 ### Basin classification and data
 
-#### Basin ID
+#### Watershed Identification
 
 -   Retrieve site classification (Reference and Non-reference sites) and
     watershed area from USGS GAGES II.
 
 ``` r
 basin_id(c("01567000", "01490000", "01492500"))
-#> Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (6%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (22%)Downloaded: 0.05 MB  (22%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (51%)Downloaded: 0.12 MB  (51%)Downloaded: 0.12 MB  (51%)Downloaded: 0.12 MB  (51%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.15 MB  (61%)Downloaded: 0.15 MB  (61%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (67%)Downloaded: 0.16 MB  (67%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.22 MB  (89%)Downloaded: 0.22 MB  (89%)Downloaded: 0.22 MB  (89%)Downloaded: 0.22 MB  (89%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (96%)Downloaded: 0.23 MB  (96%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)
 #> # A tibble: 3 × 10
 #>   STAID    STANAME      DRAIN_SQKM HUC02 LAT_GAGE LNG_GAGE STATE HCDN.2009 CLASS
 #>   <chr>    <chr>        <chr>      <chr> <chr>    <chr>    <chr> <chr>     <chr>
@@ -184,11 +183,34 @@ basin_id(c("01567000", "01490000", "01492500"))
 
 ``` r
 dam_removal(c("01564500", "01567000"))
-#> Downloaded: 0.01 MB  (67%)Downloaded: 0.01 MB  (67%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
 #> # A tibble: 3 × 7
 #>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
 #>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
 #> 1 01567000           2004         40.7         -77.6 "Burnham" Tea Creek   PA   
 #> 2 01567000           2006         40.6         -77.7 "Lewisto… Strodes Run PA   
 #> 3 01567000           2011         40.7         -78.2 ""        Tributary … PA
+```
+
+#### Dam trends
+
+-   To check if there is a relationship between trends and dam removals,
+    `dam_trends` returns a dataframe with dam removals and trends
+    statistics from the Mann-Kendall and sens.slope tests.
+
+``` r
+dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
+#> # A tibble: 7 × 21
+#>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
+#>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
+#> 1 01092000           2004         43.5         -71.5 Belmont   Tioga River NH   
+#> 2 01092000           2010         43.1         -71.4 Hooksett  Browns Bro… NH   
+#> 3 01100000           2008         42.9         -71.5 Merrimack Souhegan R… NH   
+#> 4 01100000           2010         43.1         -71.4 Hooksett  Browns Bro… NH   
+#> 5 01100000           2012         42.9         -71.5 Bedford   McQuade Br… NH   
+#> 6 01208500           1999         41.5         -73.0 Naugatuck Naugatuck … CT   
+#> 7 01208500           1999         41.6         -73.1 Waterbury Naugatuck … CT   
+#> # … with 14 more variables: tau <dbl>, sl <dbl>, S <dbl>, D <dbl>, varS <dbl>,
+#> #   `estimates.Sen's slope` <dbl>, statistic.z <dbl>, p.value <dbl>,
+#> #   null.value.z <dbl>, alternative <chr>, method <chr>, parameter.n <dbl>,
+#> #   conf.int1 <dbl>, conf.int2 <dbl>
 ```

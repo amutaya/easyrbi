@@ -67,6 +67,7 @@ sitedata(c("01564500", "01567000"), "1970-10-01", "1980-09-30") %>%
 ```{r, eval = TRUE}
 rbi_df(c("01564500", "01567000"), "1970-10-01", "1980-09-30")
 ```
+
 #### Test time series trends
 - To test the flashiness trends over time, `trends` returns the Mann-Kendall and sens.slope summary statistics for any given USGS gauge sites. 
 ```{r, eval=TRUE}
@@ -89,5 +90,9 @@ basin_id(c("01567000", "01490000", "01492500"))
 dam_removal(c("01564500", "01567000"))
 ```
 
-
+#### Dam trends
+- To check if there is a relationship between trends and dam removals, `dam_trends` returns a dataframe with dam removals and trends statistics from the Mann-Kendall and sens.slope tests.
+```{r, eval=TRUE, warning=FALSE, message=FALSE}
+dam_trends(c("01092000", "01100000", "01208500"), "1970-10-01", "1990-09-30")
+```
 
