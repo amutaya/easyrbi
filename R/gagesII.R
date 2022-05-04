@@ -12,7 +12,9 @@
 #' @examples
 #' # returns a dataframe with the dam removals for specified sites.
 #' library(easyrbi)
-#' dam_removal("01034500")
+#' study_sites <- c("01564500", "01567000", "01567500", "01568000",
+#' "01570000", "01571500", "01573000", "01574000", "01574500", "01576500")
+#' dam_removal(study_sites)
 
 #dam_removal <- function(site_num){
   #dam_url <- "https://www.sciencebase.gov/catalog/file/get/59692a64e4b0d1f9f05fbd39?f=__disk__c9%2F40%2Ff2%2Fc940f2f914e04b26bf0e81d81c9f273113f7a5c8"
