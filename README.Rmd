@@ -47,10 +47,6 @@ remotes::install_github("amutaya/easyrbi")
 ```{r example, message=FALSE}
 library(easyrbi)
 library(tidyverse)
-library(trend)
-library(Kendall)
-library(dataRetrieval)
-library(usethis)
 ```
 
 ### Retrieve USGS gauge station data 

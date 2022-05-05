@@ -50,10 +50,6 @@ remotes::install_github("amutaya/easyrbi")
 ``` r
 library(easyrbi)
 library(tidyverse)
-library(trend)
-library(Kendall)
-library(dataRetrieval)
-library(usethis)
 ```
 
 ### Retrieve USGS gauge station data
@@ -164,6 +160,7 @@ trends(x = data)
 
 ``` r
 basin_id(c("01567000", "01490000", "01492500"))
+#> Downloaded: 0.01 MB  (6%)Downloaded: 0.01 MB  (6%)Downloaded: 0.01 MB  (6%)Downloaded: 0.01 MB  (6%)Downloaded: 0.02 MB  (9%)Downloaded: 0.02 MB  (9%)Downloaded: 0.02 MB  (10%)Downloaded: 0.02 MB  (10%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.03 MB  (13%)Downloaded: 0.04 MB  (16%)Downloaded: 0.04 MB  (16%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (19%)Downloaded: 0.05 MB  (22%)Downloaded: 0.05 MB  (22%)Downloaded: 0.06 MB  (25%)Downloaded: 0.06 MB  (25%)Downloaded: 0.07 MB  (29%)Downloaded: 0.07 MB  (29%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.08 MB  (32%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (35%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.09 MB  (38%)Downloaded: 0.10 MB  (41%)Downloaded: 0.10 MB  (41%)Downloaded: 0.11 MB  (45%)Downloaded: 0.11 MB  (45%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (48%)Downloaded: 0.12 MB  (51%)Downloaded: 0.12 MB  (51%)Downloaded: 0.13 MB  (54%)Downloaded: 0.13 MB  (54%)Downloaded: 0.14 MB  (57%)Downloaded: 0.14 MB  (57%)Downloaded: 0.15 MB  (61%)Downloaded: 0.15 MB  (61%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (64%)Downloaded: 0.16 MB  (67%)Downloaded: 0.16 MB  (67%)Downloaded: 0.17 MB  (70%)Downloaded: 0.17 MB  (70%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.18 MB  (73%)Downloaded: 0.19 MB  (76%)Downloaded: 0.19 MB  (76%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (80%)Downloaded: 0.20 MB  (83%)Downloaded: 0.20 MB  (83%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.21 MB  (86%)Downloaded: 0.22 MB  (89%)Downloaded: 0.22 MB  (89%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (92%)Downloaded: 0.23 MB  (96%)Downloaded: 0.23 MB  (96%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (99%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)Downloaded: 0.24 MB  (100%)
 #> # A tibble: 3 × 10
 #>   STAID    STANAME      DRAIN_SQKM HUC02 LAT_GAGE LNG_GAGE STATE HCDN.2009 CLASS
 #>   <chr>    <chr>        <chr>      <chr> <chr>    <chr>    <chr> <chr>     <chr>
@@ -183,6 +180,7 @@ basin_id(c("01567000", "01490000", "01492500"))
 
 ``` r
 dam_removal(c("01564500", "01567000"))
+#> Downloaded: 0.01 MB  (67%)Downloaded: 0.01 MB  (67%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (71%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)Downloaded: 0.02 MB  (100%)
 #> # A tibble: 3 × 7
 #>   STAID    YearDamRemoved Dam_Latitude Dam_Longitude Location  River_Basin State
 #>   <chr>             <int>        <dbl>         <dbl> <chr>     <chr>       <chr>
