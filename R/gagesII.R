@@ -4,7 +4,6 @@
 #' @return returns a data frame with 7 variables which includes the year when the dam was removed and the site location.
 #' @export
 #'
-#' @import usethis
 #' @import dplyr
 #' @import tidyr
 #' @importFrom utils read.table
@@ -20,7 +19,7 @@ dam_removal <- function(site_num){
   dam_url <- "https://www.sciencebase.gov/catalog/file/get/59692a64e4b0d1f9f05fbd39?f=__disk__c9%2F40%2Ff2%2Fc940f2f914e04b26bf0e81d81c9f273113f7a5c8"
 
   if (!dir.exists("Dataset3_DamRemovals")){
-    dam_data <- use_zip(
+    dam_data <- usethis::use_zip(
       dam_url,
       destdir = getwd()
     )
@@ -75,7 +74,7 @@ dam_trends <- function(site_num, startDate, endDate){
 basin_id <- function(site_num){
     basin_url <- "https://www.sciencebase.gov/catalog/file/get/59692a64e4b0d1f9f05fbd39?f=__disk__3b%2F5c%2F06%2F3b5c0605384344f93b61c00fccf1a304b96019e3"
     if (!dir.exists("Dataset1_BasinID")){
-      basin_data <- use_zip(
+      basin_data <- usethis::use_zip(
         basin_url,
         destdir = getwd()
 
