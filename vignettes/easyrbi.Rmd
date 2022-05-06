@@ -25,14 +25,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(dplyr)
-library(tidyr)
-library(purrr)
-library(dataRetrieval)
 library(easyrbi)
-library(trend)
-library(Kendall)
-library(usethis)
+library(dplyr)
 ```
 
 
@@ -46,31 +40,23 @@ To get started, install the `easyrbi` package and load all the necessary package
 # If you haven't installed remotes yet, do so:
 # install.packages("remotes")
 remotes::install_github("amutaya/easyrbi")
-
-library(easyrbi)
-library(tidyverse)
-library(trend)
-library(Kendall)
-library(dataRetrieval)
-library(usethis)
-
 ```
 
 
 # Uses
 
 ## Retrieving USGS gauge station data
-Hydrologists might want more information about given sites, so the `sitedata` function provides drainage per day, the drainage area and the corresponding water year. This function provides the site names and locations (geographic coordinates). 
+Hydrologists might want more information about given sites, so the `sitedata()` function provides drainage per day, the drainage area and the corresponding water year. This function provides the site names and locations (geographic coordinates). 
 
 ### Example 
-- For every site number, `sitedata` returns 18 variables each recorded at a daily scale. Here, we have to decided to show only the first 10 observations because the output dataframe is large. 
+- For every site number, `sitedata()` returns 18 variables each recorded at a daily scale. Here, we have to decided to show only the first 10 observations because the output dataframe is large. 
 ```{r}
 sitedata(c("01078000", "01129200", "01144000"), "1970-10-01", "1980-09-30") %>%
   head(10)
 ```
 
 ## Calculate the Richard Bakers' Flashiness Index (RBI) values for given sites
-Stream flashiness is the rapidity and frequency of short term changes in the stream flow especially during runoff events. The flashiness is calculated as the ratio between the sum of daily changes in discharge and sum of daily discharge as shown by the Richard Bakers' Flashiness Index (RBI). For any given site or sites, the `rbi_df` function outputs the respective RBI values for each site and the corresponding water year over a given time period. The function will take in the site numbers, and the start and end date as characters then return a data frame. 
+Stream flashiness is the rapidity and frequency of short term changes in the stream flow especially during runoff events. The flashiness is calculated as the ratio between the sum of daily changes in discharge and sum of daily discharge as shown by the Richard Bakers' Flashiness Index (RBI). For any given site or sites, the `rbi_df()` function outputs the respective RBI values for each site and the corresponding water year over a given time period. The function will take in the site numbers, and the start and end date as characters then return a data frame. 
 
 ### Example 1
 - Get the RBI values for one specified site
@@ -85,10 +71,10 @@ rbi_df(c("01564500", "01567000", "01052500", "01038000"), "1970-10-01", "1980-09
 ```
 
 ## Calculate the RBI trends over time
-After one has obtained the RBI values for their different sites, they can also use the `trends` function to get the summary statistics for the any of the USGS gauge sites. This allows them to see if the stream flashiness values have changed over the given time frame. `trends` returns a dataframe with summary statistics from the `sens.slope` and `Mann-Kendall` functions. It is important to note that `trends` takes in data frames obtained after running `rbi_df`. 
+After one has obtained the RBI values for their different sites, they can also use the `trends()` function to get the summary statistics for the any of the USGS gauge sites. This allows them to see if the stream flashiness values have changed over the given time frame. `trends()` returns a dataframe with summary statistics from the `sens.slope()` and `Mann-Kendall()` functions. It is important to note that `trends()` takes in data frames obtained after running `rbi_df()`. 
 
 ### Example 
-- For each site, `trends` returns a dataframe wit 14 observations.
+- For each site, `trends()` returns a dataframe wit 14 observations.
 ```{r}
 ex_data <- rbi_df(c("01038000", "01567000", "01052500"), "1970-10-01", "1980-09-30")
 
@@ -96,7 +82,7 @@ trends(x = ex_data)
 ```
 
 ## Watershed Identification
-Ever wondered how large the watershed you are studying is? Or whether the watershed is consired a reference or non-refence site? For any given site numbers, the `basin_id` function generates a dataframe that consists of the watershed identification information as provided by the U.S. Geological Survey (USGS) Geospatial Attributes of Gages for Evaluating Streamflow II (GAGES-II) dataset. The `basin_id` function is interactive, so you can choose to overwrite previously downloaded data files.
+Ever wondered how large the watershed you are studying is? Or whether the watershed is consired a reference or non-refence site? For any given site numbers, the `basin_id()` function generates a dataframe that consists of the watershed identification information as provided by the U.S. Geological Survey (USGS) Geospatial Attributes of Gages for Evaluating Streamflow II (GAGES-II) dataset. The `basin_id()` function is interactive, so you can choose to overwrite previously downloaded data files.
 
 ### Example 
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
@@ -104,7 +90,7 @@ basin_id(c("01567000", "01490000", "01492500"))
 ```
 
 ## How many dams have been removed close to your study sites?
-`easyrbi` allows the user to also download dam removal data recorded between 1931 and 2014 using a simple function that only takes in the site number(s) as an argument. The `dam_removal` function is also interactive, so you can choose to overwrite previously downloaded data files.
+`easyrbi` allows the user to also download dam removal data recorded between 1931 and 2014 using a simple function that only takes in the site number(s) as an argument. The `dam_removal()` function is also interactive, so you can choose to overwrite previously downloaded data files.
 
 ### Example 
 ```{r, eval=TRUE, warning=FALSE, message=FALSE}
